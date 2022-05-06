@@ -15,12 +15,22 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(canDamga);
-        if (Input.GetMouseButtonDown(0) && canDamga)
+        
+        if (Input.GetMouseButton(0))
         {
-            DamgaBasmaFunction();
-            Time.timeScale += 0.5f;
+            Time.timeScale += 1*Time.deltaTime;
+            if (canDamga)
+            {
+                DamgaBasmaFunction();
+            }
+         
+       
         }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        Debug.Log(Time.timeScale);
     }
 
     void DamgaBasmaFunction()

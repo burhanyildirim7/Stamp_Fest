@@ -22,7 +22,7 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentPaperNumber);
+       
         if (sendPaperToTable)
         {
 
@@ -43,7 +43,7 @@ public class PaperControl : MonoBehaviour
     IEnumerator MoveCompleteTable()
     {
         paperList[currentPaperNumber].gameObject.tag = "damgaYok";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, 0, CompletedTable.transform.position.z), 1).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[currentPaperNumber]); });
 
 
