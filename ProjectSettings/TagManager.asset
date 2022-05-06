@@ -11,6 +11,11 @@ TagManager:
   - finish
   - collectible
   - elmas
+  - table
+  - damga
+  - damgaYok
+  - damgaVar
+  - completedTable
   layers:
   - Default
   - TransparentFX
