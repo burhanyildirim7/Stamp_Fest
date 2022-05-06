@@ -82,4 +82,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void WinFinish()
+    {
+    
+        GameController.instance.isContinue = false;
+        GameController.instance.ScoreCarp(7);
+                                              
+        UIController.instance.ActivateWinScreen(); 
+
+    }
+
 }

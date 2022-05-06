@@ -7,9 +7,14 @@ using DG.Tweening;
 public class DamgaControl : MonoBehaviour
 {
     public bool canDamga = false;
+    public float combatSpeed;
+    public ParticleSystem earnPoint;
+    public int damgaHakký;
+
+    GameObject paperControl;
     void Start()
     {
-        
+        paperControl = GameObject.FindGameObjectWithTag("PaperControl");
     }
 
     // Update is called once per frame
@@ -18,7 +23,7 @@ public class DamgaControl : MonoBehaviour
         
         if (Input.GetMouseButton(0))
         {
-            Time.timeScale += 1*Time.deltaTime;
+            Time.timeScale += combatSpeed*Time.deltaTime;
             if (canDamga)
             {
                 DamgaBasmaFunction();
@@ -30,12 +35,20 @@ public class DamgaControl : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-        Debug.Log(Time.timeScale);
+
+        if (damgaHakký<paperControl.GetComponent<PaperControl>().totalPoint)
+        {
+          
+            // FÝNÝSH BURAYA GELECEK
+            Time.timeScale = 0;
+        }
+    
     }
 
     void DamgaBasmaFunction()
     {
-        transform.DOMoveY(0.45f, 1).OnComplete(()=>transform.DOMoveY(0.8f,1));
+        transform.DOMoveY(0.45f, 0.5f).OnComplete(()=>transform.DOMoveY(0.8f,0.5f));
+        
         canDamga = false;
 
     }
@@ -44,6 +57,7 @@ public class DamgaControl : MonoBehaviour
     {
         if (other.gameObject.tag == "damgaYok")
         {
+            earnPoint.Play();
             other.gameObject.tag = "damgaVar";
         }
     }

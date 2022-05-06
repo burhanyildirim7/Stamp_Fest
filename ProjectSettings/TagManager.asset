@@ -16,6 +16,8 @@ TagManager:
   - damgaYok
   - damgaVar
   - completedTable
+  - MainController
+  - PaperControl
   layers:
   - Default
   - TransparentFX
