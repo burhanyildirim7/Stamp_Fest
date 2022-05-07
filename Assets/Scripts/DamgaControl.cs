@@ -8,7 +8,6 @@ public class DamgaControl : MonoBehaviour
 {
     public bool canDamga = false;
     public float combatSpeed;
-    public ParticleSystem earnPoint;
     public int damgaHakký;
     public bool brokeDamga = false;
     GameObject paperControl;
@@ -58,7 +57,6 @@ public class DamgaControl : MonoBehaviour
     {
         if (other.gameObject.tag == "damgaYok")
         {
-            earnPoint.Play();
             other.gameObject.tag = "damgaVar";
         }
     }

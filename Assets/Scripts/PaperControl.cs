@@ -11,11 +11,12 @@ public class PaperControl : MonoBehaviour
 
     int currentPaperNumber = 0;
     public int totalPoint = 0;
-    public int spawnPaperNumber;
+     int spawnPaperNumber = 15; //ne kadar kaðýt spawn olacak onu belirliyor
 
     public Text totalPointText;
 
     public GameObject paperObje;
+    public GameObject dolarAnim;
 
     GameObject Table;
     GameObject Damga;
@@ -28,7 +29,7 @@ public class PaperControl : MonoBehaviour
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
         MainController = GameObject.FindGameObjectWithTag("MainController");
 
-   
+        dolarAnim.GetComponent<TextMesh>().text = "$20";
 
         for (int i = spawnPaperNumber; i > 0; i--)
         {
@@ -56,7 +57,8 @@ public class PaperControl : MonoBehaviour
 
         if (paperList[currentPaperNumber].gameObject.tag == "damgaVar")
         {
-
+            Instantiate(dolarAnim,paperList[currentPaperNumber].transform.position,Quaternion.identity);
+           
             StartCoroutine(MoveCompleteTable());
             totalPoint++;
         }

@@ -60,3 +60,4 @@ MonoBehaviour:
   totalPoint: 0
   totalPointText: {fileID: 0}
   paperObje: {fileID: 2240235857971558802, guid: e0adb529ed855e047bebb47c0ea15b15, type: 3}
+  dolarAnim: {fileID: 9071883545934028408, guid: 465f07ac16e00d14d8b63d438747654f, type: 3}

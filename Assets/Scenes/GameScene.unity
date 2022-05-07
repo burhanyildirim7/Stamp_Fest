@@ -2005,7 +2005,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 0
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -5769,7 +5769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDamga: 0
   combatSpeed: 0.2
-  earnPoint: {fileID: 970441819}
   "damgaHakk\u0131": 6
   brokeDamga: 0
 --- !u!136 &1729471689
