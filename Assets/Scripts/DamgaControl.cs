@@ -41,7 +41,7 @@ public class DamgaControl : MonoBehaviour
 
             // FINISH BURAYA GELECEK
             brokeDamga = true;
-           // Time.timeScale = 0;
+            Time.timeScale = 0;
         }
     
     }

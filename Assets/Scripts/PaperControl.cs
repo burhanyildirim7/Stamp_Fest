@@ -11,9 +11,11 @@ public class PaperControl : MonoBehaviour
 
     int currentPaperNumber = 0;
     public int totalPoint = 0;
+    public int spawnPaperNumber;
 
     public Text totalPointText;
-  
+
+    public GameObject paperObje;
 
     GameObject Table;
     GameObject Damga;
@@ -25,6 +27,15 @@ public class PaperControl : MonoBehaviour
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
         MainController = GameObject.FindGameObjectWithTag("MainController");
+
+   
+
+        for (int i = spawnPaperNumber; i > 0; i--)
+        {
+            var spawnedPaper = Instantiate(paperObje, new Vector3(-2, i / 10f, 0), Quaternion.identity);
+            paperList.Add(spawnedPaper);
+
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +47,7 @@ public class PaperControl : MonoBehaviour
         if (sendPaperToTable)  //Ana masaya giden kod
         {
 
-            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, transform.position.y, transform.position.z), 1).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z),1).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true);  });
+            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, paperList[currentPaperNumber].transform.position.z), 1).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z),1).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true);  });
          
             sendPaperToTable = false;
 
