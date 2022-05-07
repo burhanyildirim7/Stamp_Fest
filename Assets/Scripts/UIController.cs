@@ -28,7 +28,8 @@ public class UIController : MonoBehaviour
     // Oyun ilk acildiginda calisacak olan ui fonksiyonu. 
     public void StartUI()
     {
-        ActivateTapToStartScreen();
+       // ActivateTapToStartScreen();
+   
     }
 
     /// <summary>
@@ -50,6 +51,7 @@ public class UIController : MonoBehaviour
         GamePanel.SetActive(true);
         SetLevelText(LevelController.instance.totalLevelNo);
         SetGamePlayScoreText();
+
 
     }
 

@@ -66,7 +66,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+     void Update()
+    {
+        if (GameObject.FindGameObjectWithTag("damga").GetComponent<DamgaControl>().brokeDamga)
+        {
+            WinFinish();
+            
+        }
+    }
     /// <summary>
     /// Bu fonksiyon her level baslarken cagrilir. 
     /// </summary>
@@ -86,7 +93,8 @@ public class PlayerController : MonoBehaviour
     {
     
         GameController.instance.isContinue = false;
-        GameController.instance.ScoreCarp(7);
+        GameController.instance.SetScore(100);
+        GameController.instance.ScoreCarp(1);
                                               
         UIController.instance.ActivateWinScreen(); 
 

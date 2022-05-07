@@ -33,10 +33,10 @@ public class PaperControl : MonoBehaviour
 
         totalPointText.text = totalPoint +"";
        
-        if (sendPaperToTable)
+        if (sendPaperToTable)  //Ana masaya giden kod
         {
 
-            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x,0,Table.transform.position.z),1).OnComplete(()=> { Damga.GetComponent<DamgaControl>().canDamga = true; });
+            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, transform.position.y, transform.position.z), 1).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z),1).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true);  });
          
             sendPaperToTable = false;
 
@@ -52,7 +52,7 @@ public class PaperControl : MonoBehaviour
         Debug.Log(totalPoint);
         
     }
-    IEnumerator MoveCompleteTable()
+    IEnumerator MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
     {
         paperList[currentPaperNumber].gameObject.tag = "damgaYok";
         yield return new WaitForSeconds(0.5f);

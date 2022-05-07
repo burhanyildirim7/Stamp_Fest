@@ -10,7 +10,7 @@ public class DamgaControl : MonoBehaviour
     public float combatSpeed;
     public ParticleSystem earnPoint;
     public int damgaHakký;
-
+    public bool brokeDamga = false;
     GameObject paperControl;
     void Start()
     {
@@ -38,16 +38,17 @@ public class DamgaControl : MonoBehaviour
 
         if (damgaHakký<paperControl.GetComponent<PaperControl>().totalPoint)
         {
-          
-            // FÝNÝSH BURAYA GELECEK
-            Time.timeScale = 0;
+
+            // FINISH BURAYA GELECEK
+            brokeDamga = true;
+           // Time.timeScale = 0;
         }
     
     }
 
     void DamgaBasmaFunction()
     {
-        transform.DOMoveY(0.45f, 0.5f).OnComplete(()=>transform.DOMoveY(0.8f,0.5f));
+        transform.DOMove(new Vector3(0.4f, 0.3f, -0.2f), 0.5f).OnComplete(()=>transform.DOMove(new Vector3(0.8f,0.8f,-0.8f),0.5f)); // Damganýn basýlacaðý yer kodu
         
         canDamga = false;
 
