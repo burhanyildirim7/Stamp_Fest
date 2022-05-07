@@ -5769,7 +5769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDamga: 0
   combatSpeed: 0.2
-  "damgaHakk\u0131": 6
+  "damgaHakk\u0131": 20
   brokeDamga: 0
 --- !u!136 &1729471689
 CapsuleCollider:
