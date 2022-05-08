@@ -12,13 +12,12 @@ public class DamgaControl : MonoBehaviour
     public bool brokeDamga = false;
     GameObject paperControl;
     GameObject PlayerController;
-    GameObject UIController;
+
     void Start()
     {
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
-        PlayerController = GameObject.FindGameObjectWithTag("PlayerController");
-        UIController = GameObject.FindGameObjectWithTag("UIController");
-  
+        PlayerController = GameObject.FindGameObjectWithTag("damga");
+
     }
 
     // Update is called once per frame
@@ -50,6 +49,12 @@ public class DamgaControl : MonoBehaviour
                 brokeDamga = true;
                 GetComponent<DamgaControl>().enabled = false;
                 paperControl.SetActive(false);
+
+                GameController.instance.isContinue = false;
+                GameController.instance.SetScore(100);
+                GameController.instance.ScoreCarp(1);
+
+                UIController.instance.ActivateWinScreen();
             }
         }
     }

@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<DamgaControl>().brokeDamga)
         {
-            WinFinish();
+            //WinFinish();
       
         }
 
@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
     public void StartingEvents()
     {
 
-       /* transform.parent.transform.rotation = Quaternion.Euler(0, 0, 0);
+       /* 
+        transform.parent.transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.parent.transform.position = Vector3.zero;
         GameController.instance.isContinue = false;
         GameController.instance.score = 0;
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
     
         GameController.instance.isContinue = false;
-        GameController.instance.SetScore(collectibleDegeri);
+        GameController.instance.SetScore(100);
         GameController.instance.ScoreCarp(1);
                                               
         UIController.instance.ActivateWinScreen(); 

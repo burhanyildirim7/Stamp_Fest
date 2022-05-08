@@ -690,7 +690,6 @@ MonoBehaviour:
   tapToStartScoreText: {fileID: 1455347960582755020}
   totalElmasText: {fileID: 0}
   ScoreTextAnim: {fileID: 2326140859153717883}
-  gameStart: 0
 --- !u!4 &955729543
 Transform:
   m_ObjectHideFlags: 0
@@ -1256,7 +1255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDamga: 0
   comboSpeed: 0.2
-  "damgaHakk\u0131": 10
+  "damgaHakk\u0131": 1
   brokeDamga: 0
 --- !u!136 &1729471689
 CapsuleCollider:
@@ -1351,7 +1350,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleDegeri: 50
   xVarMi: 1
-  collectibleVarMi: 0
+  collectibleVarMi: 1
+  startGame: 0
 --- !u!1 &1853089447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2063141235
 Transform:
   m_ObjectHideFlags: 0
