@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
     // TAPTOSTART TUSUNA BASILDISINDA  --- GIRIS EKRANINDA VE LEVEL BASLARINDA
     public void TapToStartButtonClick()
     {
-
+        GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame = true;
         GameController.instance.isContinue = true;
         //PlayerController.instance.SetArmForGaming();
         TapToStartPanel.SetActive(false);

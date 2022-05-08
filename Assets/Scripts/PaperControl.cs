@@ -31,17 +31,19 @@ public class PaperControl : MonoBehaviour
         Table = GameObject.FindGameObjectWithTag("table");
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
-        PlayerController = GameObject.FindGameObjectWithTag("PlayerController");
         UIController = GameObject.FindGameObjectWithTag("UIController");
-             
 
+ 
         spawnPaperFunc();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
+        {
+
+        
        
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
 
@@ -72,7 +74,7 @@ public class PaperControl : MonoBehaviour
             StartCoroutine(MoveCompleteTable());
             totalPoint++;
         }
-      
+        }
     }
 
     void SendMainTable()

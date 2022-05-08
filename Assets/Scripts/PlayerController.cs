@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public int collectibleDegeri;
     public bool xVarMi = true;
     public bool collectibleVarMi = true;
- 
+    public bool startGame = false;
     
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
       
         }
 
-
+      
         
     }
     /// <summary>

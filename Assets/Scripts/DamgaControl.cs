@@ -24,8 +24,9 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-
+        if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
+        {
+            Debug.Log("Çalýþýyor");
 
             if (Input.GetMouseButton(0))
             {
@@ -50,7 +51,7 @@ public class DamgaControl : MonoBehaviour
                 GetComponent<DamgaControl>().enabled = false;
                 paperControl.SetActive(false);
             }
-      
+        }
     }
 
     void DamgaBasmaFunction()
