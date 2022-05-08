@@ -10,17 +10,20 @@ public class PlayerController : MonoBehaviour
     public int collectibleDegeri;
     public bool xVarMi = true;
     public bool collectibleVarMi = true;
-
-
+ 
+    
     private void Awake()
     {
         if (instance == null) instance = this;
+       
+
         //else Destroy(this);
     }
 
     void Start()
     {
         StartingEvents();
+   
     }
 
     /// <summary>
@@ -71,8 +74,11 @@ public class PlayerController : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<DamgaControl>().brokeDamga)
         {
             WinFinish();
-            
+      
         }
+
+
+        
     }
     /// <summary>
     /// Bu fonksiyon her level baslarken cagrilir. 
@@ -80,12 +86,13 @@ public class PlayerController : MonoBehaviour
     public void StartingEvents()
     {
 
-        transform.parent.transform.rotation = Quaternion.Euler(0, 0, 0);
+       /* transform.parent.transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.parent.transform.position = Vector3.zero;
         GameController.instance.isContinue = false;
         GameController.instance.score = 0;
         transform.position = new Vector3(0, transform.position.y, 0);
         GetComponent<Collider>().enabled = true;
+       */
 
     }
 
@@ -93,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
     
         GameController.instance.isContinue = false;
-        GameController.instance.SetScore(100);
+        GameController.instance.SetScore(collectibleDegeri);
         GameController.instance.ScoreCarp(1);
                                               
         UIController.instance.ActivateWinScreen(); 

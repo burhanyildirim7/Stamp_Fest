@@ -13,10 +13,12 @@ public class UIController : MonoBehaviour
 
 
 
+
     // singleton yapisi burada kuruluyor.
     private void Awake()
     {
         if (instance == null) instance = this;
+  
         //else Destroy(this);
     }
 
@@ -51,7 +53,7 @@ public class UIController : MonoBehaviour
         GamePanel.SetActive(true);
         SetLevelText(LevelController.instance.totalLevelNo);
         SetGamePlayScoreText();
-
+        
 
     }
 

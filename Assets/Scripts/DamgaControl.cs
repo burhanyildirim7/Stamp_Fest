@@ -7,42 +7,50 @@ using DG.Tweening;
 public class DamgaControl : MonoBehaviour
 {
     public bool canDamga = false;
-    public float combatSpeed;
+    public float comboSpeed;
     public int damgaHakký;
     public bool brokeDamga = false;
     GameObject paperControl;
+    GameObject PlayerController;
+    GameObject UIController;
     void Start()
     {
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
+        PlayerController = GameObject.FindGameObjectWithTag("PlayerController");
+        UIController = GameObject.FindGameObjectWithTag("UIController");
+  
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButton(0))
-        {
-            Time.timeScale += combatSpeed*Time.deltaTime;
-            if (canDamga)
+     
+
+
+            if (Input.GetMouseButton(0))
             {
-                DamgaBasmaFunction();
+                Time.timeScale += comboSpeed * Time.deltaTime;
+                if (canDamga)
+                {
+                    DamgaBasmaFunction();
+                }
+
+
             }
-         
-       
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+            else
+            {
+                Time.timeScale = 1;
+            }
 
-        if (damgaHakký<paperControl.GetComponent<PaperControl>().totalPoint)
-        {
+            if (damgaHakký < paperControl.GetComponent<PaperControl>().totalPoint)
+            {
 
-            // FINISH BURAYA GELECEK
-            brokeDamga = true;
-            Time.timeScale = 0;
-        }
-    
+                // FINISH BURAYA GELECEK
+                brokeDamga = true;
+                GetComponent<DamgaControl>().enabled = false;
+                paperControl.SetActive(false);
+            }
+      
     }
 
     void DamgaBasmaFunction()

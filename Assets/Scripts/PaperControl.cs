@@ -19,19 +19,21 @@ public class PaperControl : MonoBehaviour
 
     public GameObject paperObje;
     public GameObject dolarAnim;
+    public int dolarMiktarý;
 
     GameObject Table;
     GameObject Damga;
     GameObject CompletedTable;
-    GameObject MainController;
+    GameObject PlayerController;
+    GameObject UIController;
     void Start()
     {
         Table = GameObject.FindGameObjectWithTag("table");
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
-        MainController = GameObject.FindGameObjectWithTag("MainController");
-
-        dolarAnim.GetComponent<TextMesh>().text = "$20";      // Para animasyonu kaç olacaksa buraya yazýyoruz
+        PlayerController = GameObject.FindGameObjectWithTag("PlayerController");
+        UIController = GameObject.FindGameObjectWithTag("UIController");
+             
 
         spawnPaperFunc();
     }
@@ -39,6 +41,11 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+       
+        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
+
+
         if (currentPaperNumber == paperList.Count)
         {
             if (paperFinish == false)
@@ -65,7 +72,7 @@ public class PaperControl : MonoBehaviour
             StartCoroutine(MoveCompleteTable());
             totalPoint++;
         }
-       
+      
     }
 
     void SendMainTable()
