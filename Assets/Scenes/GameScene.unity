@@ -1997,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 1713292746}
     - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
       propertyPath: spawnPaperNumber
-      value: 150
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
       propertyPath: paperList.Array.size

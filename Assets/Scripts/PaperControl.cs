@@ -25,6 +25,7 @@ public class PaperControl : MonoBehaviour
     public GameObject dolarAnim;
     public int dolarMiktarý;
     public int currentPaperNumber = 0;
+    int damgaPaperSayisi = 0;
 
     GameObject Table;
     GameObject Damga;
@@ -37,6 +38,7 @@ public class PaperControl : MonoBehaviour
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
         UIController = GameObject.FindGameObjectWithTag("UIController");
+       
         spawnPaperTower = spawnPaperNumber;
 
         spawnPaperFunc();
@@ -45,7 +47,8 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+      
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
@@ -87,12 +90,28 @@ public class PaperControl : MonoBehaviour
     void MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
     {
         paperList[currentPaperNumber].gameObject.tag = "damgaYok";
-       
-        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; currentPaperNumber++; });
-       
 
+        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; currentPaperNumber++; damgaPaperSayisi++; });
+
+        if (damgaPaperSayisi == 99 )
+        {
+            StartCoroutine(Swerve());
+        }
     }
 
+    IEnumerator Swerve()
+    {
+        damgaPaperSayisi = 0;
+        Time.timeScale = 1;
+        Damga.GetComponent<PlayerController>().startGame =false;
+        yield return new WaitForSecondsRealtime(1.5f);
+        for (int i = 0; i < paperList.Count; i++)
+        {
+            paperList[i].transform.DOMoveX(paperList[i].transform.position.x+1.8f, 2).OnComplete(()=> { Damga.GetComponent<PlayerController>().startGame = true; });
+        }
+      
+
+    }
     void spawnPaperFunc()
     {
         /*
@@ -113,15 +132,14 @@ public class PaperControl : MonoBehaviour
           }
           */
 
-        for (int a = 0; a < 2; a++)
+        for (int a = 1; a < (spawnPaperNumber / 100)+2; a++)
         {
 
-     
             if (spawnPaperTower > 100)
             {
                 for (int i = 100; i > 0; i--)
                 {
-                    var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f, i / 10f, 0), Quaternion.identity);
+                    var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f*a, i / 10f, 0), Quaternion.identity);
                     paperList.Add(spawnedPaper);
                     spawnPaperTower--;
                 
@@ -132,7 +150,7 @@ public class PaperControl : MonoBehaviour
             Debug.Log("Çalýþýyor");
             for (int i = spawnPaperTower; i > 0; i--)
             {
-                var spawnedPaper = Instantiate(paperObje, new Vector3(-3.2f, i / 10f, 0), Quaternion.identity);
+                var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f*a, i / 10f, 0), Quaternion.identity);
                 paperList.Add(spawnedPaper);
                     spawnPaperTower--;
 
