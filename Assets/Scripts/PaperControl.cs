@@ -11,12 +11,13 @@ public class PaperControl : MonoBehaviour
 
     public List<GameObject> paperList = new List<GameObject>();
 
-    int currentPaperNumber = 0;
+ 
     public int totalPoint = 0;
     public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
 
     public Text totalPointText;
 
+    public float paperMoveSpeed = 1;
     public GameObject paperObje;
     public GameObject dolarAnim;
     public int dolarMiktarý;
@@ -40,7 +41,9 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Time.timeScale);
        
+
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
 
@@ -49,28 +52,27 @@ public class PaperControl : MonoBehaviour
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
 
 
-        if (currentPaperNumber == paperList.Count)
+        if (paperList.Count <= 50)
         {
             if (paperFinish == false)
             {
-                spawnPaperFunc();
-                paperFinish = true;
+                    for (int i = 0; i < paperList.Count; i++)
+                    {
+                        paperList[i].transform.DOMoveX(-1.8f,2);
+                    }
             }
         
         }
-        else
-        {
-            paperFinish = false;
-        }
+     
 
         totalPointText.text = totalPoint +"";
 
         SendMainTable();
 
 
-        if (paperList[currentPaperNumber].gameObject.tag == "damgaVar")
+        if (paperList[0].gameObject.tag == "damgaVar")
         {
-            Instantiate(dolarAnim,paperList[currentPaperNumber].transform.position,Quaternion.identity);
+            Instantiate(dolarAnim,paperList[0].transform.position,Quaternion.identity);
            
             StartCoroutine(MoveCompleteTable());
             totalPoint++;
@@ -83,7 +85,7 @@ public class PaperControl : MonoBehaviour
         if (sendPaperToTable)  //Ana masaya giden kod
         {
 
-            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, paperList[currentPaperNumber].transform.position.z), 1).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z), 1).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
+            paperList[0].transform.DOMove(new Vector3(Table.transform.position.x, paperList[0].transform.position.y, paperList[0].transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[0].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
 
             sendPaperToTable = false;
 
@@ -91,15 +93,16 @@ public class PaperControl : MonoBehaviour
     }
     IEnumerator MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
     {
-        paperList[currentPaperNumber].gameObject.tag = "damgaYok";
-        yield return new WaitForSeconds(0.5f);
-        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), 1).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[currentPaperNumber]); });
+        paperList[0].gameObject.tag = "damgaYok";
+        yield return new WaitForSeconds(0);
+        paperList[0].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[0]); });
        
 
     }
 
     void spawnPaperFunc()
     {
+      
         if (paperList.Count <=100)
         {     
         for (int i = spawnPaperNumber; i > 0; i--)
@@ -115,6 +118,9 @@ public class PaperControl : MonoBehaviour
         }
 
         }
-      
+    
+
+
+    
     }
 }

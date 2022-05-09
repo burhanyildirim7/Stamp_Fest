@@ -13,6 +13,8 @@ public class DamgaControl : MonoBehaviour
     GameObject paperControl;
     GameObject PlayerController;
 
+    public float damgaSpeed = 0.1f;
+
     void Start()
     {
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
@@ -27,22 +29,34 @@ public class DamgaControl : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
-        
+
+
 
             if (Input.GetMouseButton(0))
             {
-                Time.timeScale += comboSpeed * Time.deltaTime;
+                if (Time.timeScale <= 95)
+                {
+                    Time.timeScale += comboSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    Time.timeScale = 95;
+                }
+              
                 if (canDamga)
                 {
                     DamgaBasmaFunction();
                 }
-
 
             }
             else
             {
                 Time.timeScale = 1;
             }
+
+
+
+
 
             if (damgaHakký < paperControl.GetComponent<PaperControl>().totalPoint)
             {
@@ -63,7 +77,7 @@ public class DamgaControl : MonoBehaviour
 
     void DamgaBasmaFunction()
     {
-        transform.DOMove(new Vector3(0.4f, 0.3f, -0.2f), 0.5f).OnComplete(()=>transform.DOMove(new Vector3(0.8f,0.8f,-0.8f),0.5f)); // Damganýn basýlacaðý yer kodu
+        transform.DOMove(new Vector3(0.4f, 0.3f, -0.2f), damgaSpeed).OnComplete(()=>transform.DOMove(new Vector3(0.8f,0.8f,-0.8f), damgaSpeed)); // Damganýn basýlacaðý yer kodu
         
         canDamga = false;
 
