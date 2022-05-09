@@ -10,10 +10,13 @@ public class PaperControl : MonoBehaviour
     bool paperFinish = false;
 
     public List<GameObject> paperList = new List<GameObject>();
+    public List<GameObject> paperList1 = new List<GameObject>();
+    public List<GameObject> paperList2 = new List<GameObject>();
 
- 
+
     public int totalPoint = 0;
     public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
+    int spawnPaperTower;
 
     public Text totalPointText;
 
@@ -21,6 +24,7 @@ public class PaperControl : MonoBehaviour
     public GameObject paperObje;
     public GameObject dolarAnim;
     public int dolarMiktarý;
+    public int currentPaperNumber = 0;
 
     GameObject Table;
     GameObject Damga;
@@ -33,15 +37,14 @@ public class PaperControl : MonoBehaviour
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
         UIController = GameObject.FindGameObjectWithTag("UIController");
+        spawnPaperTower = spawnPaperNumber;
 
- 
         spawnPaperFunc();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.timeScale);
        
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
@@ -52,17 +55,7 @@ public class PaperControl : MonoBehaviour
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
 
 
-        if (paperList.Count <= 50)
-        {
-            if (paperFinish == false)
-            {
-                    for (int i = 0; i < paperList.Count; i++)
-                    {
-                        paperList[i].transform.DOMoveX(-1.8f,2);
-                    }
-            }
-        
-        }
+       
      
 
         totalPointText.text = totalPoint +"";
@@ -70,11 +63,11 @@ public class PaperControl : MonoBehaviour
         SendMainTable();
 
 
-        if (paperList[0].gameObject.tag == "damgaVar")
+        if (paperList[currentPaperNumber].gameObject.tag == "damgaVar")
         {
-            Instantiate(dolarAnim,paperList[0].transform.position,Quaternion.identity);
+            Instantiate(dolarAnim,paperList[currentPaperNumber].transform.position,Quaternion.identity);
            
-            StartCoroutine(MoveCompleteTable());
+            MoveCompleteTable();
             totalPoint++;
         }
         }
@@ -85,42 +78,67 @@ public class PaperControl : MonoBehaviour
         if (sendPaperToTable)  //Ana masaya giden kod
         {
 
-            paperList[0].transform.DOMove(new Vector3(Table.transform.position.x, paperList[0].transform.position.y, paperList[0].transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[0].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
+            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, paperList[currentPaperNumber].transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, 0, Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
 
             sendPaperToTable = false;
 
         }
     }
-    IEnumerator MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
+    void MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
     {
-        paperList[0].gameObject.tag = "damgaYok";
-        yield return new WaitForSeconds(0);
-        paperList[0].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[0]); });
+        paperList[currentPaperNumber].gameObject.tag = "damgaYok";
+       
+        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; currentPaperNumber++; });
        
 
     }
 
     void spawnPaperFunc()
     {
-      
-        if (paperList.Count <=100)
-        {     
-        for (int i = spawnPaperNumber; i > 0; i--)
-        {        
-                var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f, i / 10f, 0), Quaternion.identity);
-                paperList.Add(spawnedPaper);
+        /*
+          if (paperList.Count <=100)
+          {     
+          for (int i = spawnPaperNumber; i > 0; i--)
+          {        
+                  var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f, i / 10f, 0), Quaternion.identity);
+                  paperList.Add(spawnedPaper);
 
-                if (i<=spawnPaperNumber-100)
+                  if (i<=spawnPaperNumber-100)
+                  {
+                      var spawnedPaper1 = Instantiate(paperObje, new Vector3(-3.2f, i / 10f, 0), Quaternion.identity);
+                      paperList.Add(spawnedPaper1);
+                  }
+          }
+
+          }
+          */
+
+        for (int a = 0; a < 2; a++)
+        {
+
+     
+            if (spawnPaperTower > 100)
+            {
+                for (int i = 100; i > 0; i--)
                 {
-                    var spawnedPaper1 = Instantiate(paperObje, new Vector3(-3.2f, i / 10f, 0), Quaternion.identity);
+                    var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f, i / 10f, 0), Quaternion.identity);
                     paperList.Add(spawnedPaper);
+                    spawnPaperTower--;
+                
                 }
+            }
+        else if(spawnPaperTower < 100)
+        {
+            Debug.Log("Çalýþýyor");
+            for (int i = spawnPaperTower; i > 0; i--)
+            {
+                var spawnedPaper = Instantiate(paperObje, new Vector3(-3.2f, i / 10f, 0), Quaternion.identity);
+                paperList.Add(spawnedPaper);
+                    spawnPaperTower--;
+
+            }
         }
 
         }
-    
-
-
-    
     }
 }

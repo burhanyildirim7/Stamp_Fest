@@ -20,7 +20,7 @@ public class DamgaControl : MonoBehaviour
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
 
-        damgaHakký = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
+       damgaHakký = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
 
     }
 
