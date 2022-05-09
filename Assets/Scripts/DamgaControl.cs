@@ -18,6 +18,8 @@ public class DamgaControl : MonoBehaviour
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
 
+        damgaHakký = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
+
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class DamgaControl : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
-            Debug.Log("Çalýþýyor");
+        
 
             if (Input.GetMouseButton(0))
             {

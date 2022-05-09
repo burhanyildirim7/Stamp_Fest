@@ -13,7 +13,7 @@ public class PaperControl : MonoBehaviour
 
     int currentPaperNumber = 0;
     public int totalPoint = 0;
-     int spawnPaperNumber = 15; //ne kadar kaðýt spawn olacak onu belirliyor
+    public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
 
     public Text totalPointText;
 
@@ -40,6 +40,7 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
 
@@ -92,18 +93,28 @@ public class PaperControl : MonoBehaviour
     {
         paperList[currentPaperNumber].gameObject.tag = "damgaYok";
         yield return new WaitForSeconds(0.5f);
-        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, 0, CompletedTable.transform.position.z), 1).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[currentPaperNumber]); });
-
+        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), 1).OnComplete(()=> { sendPaperToTable = true; paperList.Remove(paperList[currentPaperNumber]); });
+       
 
     }
 
     void spawnPaperFunc()
     {
+        if (paperList.Count <=100)
+        {     
         for (int i = spawnPaperNumber; i > 0; i--)
-        {
-            var spawnedPaper = Instantiate(paperObje, new Vector3(-2, i / 10f, 0), Quaternion.identity);
-            paperList.Add(spawnedPaper);
+        {        
+                var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f, i / 10f, 0), Quaternion.identity);
+                paperList.Add(spawnedPaper);
+
+                if (i<=spawnPaperNumber-100)
+                {
+                    var spawnedPaper1 = Instantiate(paperObje, new Vector3(-3.2f, i / 10f, 0), Quaternion.identity);
+                    paperList.Add(spawnedPaper);
+                }
+        }
 
         }
+      
     }
 }

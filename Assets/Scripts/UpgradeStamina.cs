@@ -15,6 +15,6 @@ public class UpgradeStamina : MonoBehaviour
 
 	void TaskOnClick()
 	{
-		GameObject.FindGameObjectWithTag("damga").GetComponent<DamgaControl>().damgaHakký += 1;
+		//Stamina Arttýrma Kodu Buraya Gelecek
 	}
 }
