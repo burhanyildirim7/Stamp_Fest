@@ -93,7 +93,7 @@ public class PaperControl : MonoBehaviour
 
         paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x,totalPoint/10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(()=> { sendPaperToTable = true; currentPaperNumber++; damgaPaperSayisi++; });
 
-        if (damgaPaperSayisi == 99 )
+        if (damgaPaperSayisi == 100 )
         {
             StartCoroutine(Swerve());
         }
@@ -107,7 +107,15 @@ public class PaperControl : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
         for (int i = 0; i < paperList.Count; i++)
         {
-            paperList[i].transform.DOMoveX(paperList[i].transform.position.x+1.8f, 2).OnComplete(()=> { Damga.GetComponent<PlayerController>().startGame = true; });
+            /* 
+            paperList[i].transform.DOMoveY(paperList[i].transform.position.y + 0.8f, 1).OnComplete(()=> {
+                Damga.GetComponent<PlayerController>().startGame = true;
+            });
+            */
+            paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 1.8f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1,1,0.5f).OnComplete(() => {
+                Damga.GetComponent<PlayerController>().startGame = true;
+            }); 
+            //paperList[i].transform.position = Vector3.Slerp(paperList[i].transform.position,new Vector3(paperList[i].transform.position.x+1.8f,paperList[i].transform.position.y,paperList[i].transform.position.z),1*Time.deltaTime    );
         }
       
 
@@ -137,7 +145,7 @@ public class PaperControl : MonoBehaviour
 
             if (spawnPaperTower > 100)
             {
-                for (int i = 100; i > 0; i--)
+                for (int i = 100; i >= 0; i--)
                 {
                     var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f*a, i / 10f, 0), Quaternion.identity);
                     paperList.Add(spawnedPaper);
@@ -148,7 +156,7 @@ public class PaperControl : MonoBehaviour
         else if(spawnPaperTower < 100)
         {
             Debug.Log("Çalýþýyor");
-            for (int i = spawnPaperTower; i > 0; i--)
+            for (int i = spawnPaperTower; i >= 0; i--)
             {
                 var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f*a, i / 10f, 0), Quaternion.identity);
                 paperList.Add(spawnedPaper);
