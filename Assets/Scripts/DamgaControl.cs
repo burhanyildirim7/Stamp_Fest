@@ -87,7 +87,10 @@ public class DamgaControl : MonoBehaviour
     {
         if (other.gameObject.tag == "damgaYok")
         {
+            paperControl.GetComponent<PaperControl>().MoveCompleteTable();
             other.gameObject.tag = "damgaVar";
+           
+        
         }
     }
 }
