@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PaperControl : MonoBehaviour
 {
-    bool sendPaperToTable = true;
+    public bool sendPaperToTable = true;
     bool paperFinish = false;
 
     public List<GameObject> paperList = new List<GameObject>();
@@ -16,9 +16,9 @@ public class PaperControl : MonoBehaviour
 
 
     public int totalPoint = 0;
-    int totalPointFake = 0;
+    public int totalPointFake = 0;
     public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
-    int spawnPaperTower;
+    public int spawnPaperTower;
 
     public Text totalPointText;
 
@@ -27,7 +27,7 @@ public class PaperControl : MonoBehaviour
     public GameObject dolarAnim;
     public int dolarMiktarý;
     public int currentPaperNumber = 0;
-    int damgaPaperSayisi = 0;
+    public int damgaPaperSayisi = 0;
 
     GameObject Table;
     GameObject Damga;
@@ -43,13 +43,13 @@ public class PaperControl : MonoBehaviour
        
         spawnPaperTower = spawnPaperNumber;
 
-        spawnPaperFunc();
+       // spawnPaperFunc();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
 
         totalPointText.text = totalPoint + "";
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
@@ -58,18 +58,10 @@ public class PaperControl : MonoBehaviour
            
        
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
-
-
-       
-     
-
       
-
-        SendMainTable();
-
-
-      
+        SendMainTable();   
         }
+      
     }
 
     void SendMainTable()
@@ -105,6 +97,8 @@ public class PaperControl : MonoBehaviour
         damgaPaperSayisi = 0;
         Time.timeScale = 1;
 
+        paperMoveSpeed = Mathf.Clamp(paperMoveSpeed,0.1f,1);
+
         Damga.GetComponent<PlayerController>().startGame = false;
         yield return new WaitForSecondsRealtime(1.5f);
         
@@ -121,7 +115,7 @@ public class PaperControl : MonoBehaviour
             }
             else  // DAMGALILARIN HAREKETÝ BURADA
             {
-                damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+1.8f), 1, 1, 0.5f).OnComplete(() => {
+                damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.3f), 1, 1, 0.5f).OnComplete(() => {
                     Damga.GetComponent<PlayerController>().startGame = true;
                 });
             }
@@ -130,10 +124,12 @@ public class PaperControl : MonoBehaviour
       
 
     }
-    void spawnPaperFunc()
+    public void spawnPaperFunc()
     {
-    
-
+        Debug.Log("Çalýþtý");
+        Debug.Log("Spawn Paper Number  = " + spawnPaperNumber);
+        Debug.Log("Spawn Paper Towe Number  = " + spawnPaperTower);
+     
         for (int a = 1; a < (spawnPaperNumber / 100)+2; a++)
         {
 
@@ -149,7 +145,6 @@ public class PaperControl : MonoBehaviour
             }
         else if(spawnPaperTower < 100)
         {
-            Debug.Log("Çalýþýyor");
             for (int i = spawnPaperTower; i > 0; i--)
             {
                 var spawnedPaper = Instantiate(paperObje, new Vector3(-1.8f*a, i / 10f, 0), Quaternion.identity);
@@ -160,5 +155,20 @@ public class PaperControl : MonoBehaviour
         }
 
         }
+    }
+
+    public void DeletePapers()
+    {
+        for (int i = 0; i < paperList.Count; i++)
+        {
+            Destroy(paperList[i]);
+        
+          
+
+        }
+        paperList.Clear();
+
+
+ 
     }
 }

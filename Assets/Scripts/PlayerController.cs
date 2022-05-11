@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             //WinFinish();
       
         }
-
+        Debug.Log(startGame);
       
         
     }
@@ -85,15 +85,31 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void StartingEvents()
     {
+        GameObject paperControl = GameObject.FindGameObjectWithTag("PaperControl");
+        paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
+        paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
+        paperControl.GetComponent<PaperControl>().totalPoint = 0;
+        paperControl.GetComponent<PaperControl>().totalPointFake = 0;
+        paperControl.GetComponent<PaperControl>().spawnPaperNumber = 250;
+        paperControl.GetComponent<PaperControl>().spawnPaperTower = 250;
+        paperControl.GetComponent<PaperControl>().paperMoveSpeed = 1;
+        paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
+        paperControl.GetComponent<PaperControl>().DeletePapers();
+        paperControl.GetComponent<PaperControl>().spawnPaperFunc();
 
-       /* 
-        transform.parent.transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.parent.transform.position = Vector3.zero;
-        GameController.instance.isContinue = false;
-        GameController.instance.score = 0;
-        transform.position = new Vector3(0, transform.position.y, 0);
-        GetComponent<Collider>().enabled = true;
-       */
+
+       
+       
+
+       
+        GetComponent<DamgaControl>().elHakki = 0;
+        GetComponent<DamgaControl>().damgaSpeed = 1;
+        GetComponent<DamgaControl>().canDamga = false;
+        GetComponent<DamgaControl>().smokeParticle.Stop();
+        
+       
+       
+       
 
     }
 
