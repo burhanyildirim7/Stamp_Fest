@@ -115,14 +115,13 @@ public class PaperControl : MonoBehaviour
 
             if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETÝ BURADA
             {
-   
+            
                     paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
                         Damga.GetComponent<PlayerController>().startGame = true;
-                
-                      
-                    
-                         
+
                     });
+              
+               
           
            
            
@@ -140,6 +139,8 @@ public class PaperControl : MonoBehaviour
       
 
     }
+
+ 
     public void spawnPaperFunc()
     {
      

@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         GetComponent<DamgaControl>().damgaSpeed = 1;
         GetComponent<DamgaControl>().canDamga = false;
         GetComponent<DamgaControl>().smokeParticle.Stop();
+        GetComponent<DamgaControl>().firstHandColor = Color.blue;
         
        
        
