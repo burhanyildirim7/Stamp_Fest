@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8530214536722036762}
   m_Layer: 0
   m_Name: Kagit2
-  m_TagString: Untagged
+  m_TagString: damgaYok
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8530214536722036740}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6665589, y: 0.01, z: 0.66148865}
+  m_LocalScale: {x: 2, y: 0.01, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

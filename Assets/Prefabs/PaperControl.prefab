@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43119be6bc6e4ae4ab6acec2de4ca520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendPaperToTable: 1
   paperList:
   - {fileID: 0}
   - {fileID: 0}
@@ -57,7 +58,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  damgaliPaperList: []
   totalPoint: 0
+  totalPointFake: 0
+  spawnPaperNumber: 250
+  spawnPaperTower: 250
   totalPointText: {fileID: 0}
-  paperObje: {fileID: 2240235857971558802, guid: e0adb529ed855e047bebb47c0ea15b15, type: 3}
+  paperMoveSpeed: 1
+  paperObje: {fileID: 8530214536722036740, guid: d71091730a404b84d8385f6280d934dc, type: 3}
   dolarAnim: {fileID: 9071883545934028408, guid: 465f07ac16e00d14d8b63d438747654f, type: 3}
+  "dolarMiktar\u0131": 15
+  currentPaperNumber: 0
+  damgaPaperSayisi: 0

@@ -76,7 +76,6 @@ public class PlayerController : MonoBehaviour
             //WinFinish();
       
         }
-        Debug.Log(startGame);
       
         
     }
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().totalPoint = 0;
         paperControl.GetComponent<PaperControl>().totalPointFake = 0;
         paperControl.GetComponent<PaperControl>().spawnPaperNumber = 250;
-        paperControl.GetComponent<PaperControl>().spawnPaperTower = 250;
+        paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
         paperControl.GetComponent<PaperControl>().paperMoveSpeed = 1;
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
        
 
        
-        GetComponent<DamgaControl>().elHakki = 0;
+        GetComponent<DamgaControl>().elHakki = 10;
         GetComponent<DamgaControl>().damgaSpeed = 1;
         GetComponent<DamgaControl>().canDamga = false;
         GetComponent<DamgaControl>().smokeParticle.Stop();
