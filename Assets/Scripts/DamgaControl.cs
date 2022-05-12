@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DamgaControl : MonoBehaviour
 {
     private Vector3 firstPositionDamga;
+    private Vector3 firstRotationDamga;
     public bool canDamga = false;
     public float comboSpeed;
     public int damgaHakki;
@@ -24,6 +25,7 @@ public class DamgaControl : MonoBehaviour
     void Start()
     {
         firstPositionDamga = transform.position;
+        firstRotationDamga = transform.eulerAngles;
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
 
@@ -35,6 +37,7 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
 
@@ -42,7 +45,7 @@ public class DamgaControl : MonoBehaviour
         {
             elHakki = 10;
         }
-      
+      /*
         else if (elHakki<=0)
         {
             GameController.instance.isContinue = false; // Nedense çalýþmýyor.
@@ -50,7 +53,7 @@ public class DamgaControl : MonoBehaviour
             UIController.instance.ActivateLooseScreen();
 
         }
-      
+      */
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
           
@@ -124,9 +127,9 @@ public class DamgaControl : MonoBehaviour
 
     void DamgaBasmaFunction()
     {
-       
 
-        transform.DOMove(new Vector3(transform.position.x,transform.position.y-1f, transform.position.z+1.65f), damgaSpeed).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed)); // Damganýn basýlacaðý yer kodu
+        transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/2).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/2)) ;
+        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-0.7f, transform.position.z), damgaSpeed/2).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/2)); // Damganýn basýlacaðý yer kodu
 
         canDamga = false;
         

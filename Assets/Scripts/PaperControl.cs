@@ -14,7 +14,7 @@ public class PaperControl : MonoBehaviour
     public GameObject[] damgaliPaperList;
 
 
-
+    public GameObject spawnPaperPosition;
     public int totalPoint = 0;
     public int totalPointFake = 0;
     public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
@@ -112,7 +112,7 @@ public class PaperControl : MonoBehaviour
 
             if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETÝ BURADA
             {
-                paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 1.8f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
+                paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
                     Damga.GetComponent<PlayerController>().startGame = true;
                 });
             }
@@ -130,14 +130,14 @@ public class PaperControl : MonoBehaviour
     public void spawnPaperFunc()
     {
      
-        for (int a = 1; a < (spawnPaperNumber / 100)+2; a++)
+        for (int a = 0; a < (spawnPaperNumber / 100)+2; a++)
         {
 
             if (spawnPaperTower > 100)
             {
                 for (int i = 100; i > 0; i--)
                 {
-                    var spawnedPaper = Instantiate(paperObje, new Vector3(-1f*a*2.5f, (i-10) / 10f, 3.5f), Quaternion.identity);
+                    var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x-a*3, (i-10) / 10f, spawnPaperPosition.transform.position.z), Quaternion.identity);
                     paperList.Add(spawnedPaper);
                     spawnPaperTower--;
                 
@@ -147,7 +147,7 @@ public class PaperControl : MonoBehaviour
         {
             for (int i = spawnPaperTower; i > 0; i--)
             {
-                var spawnedPaper = Instantiate(paperObje, new Vector3(-1f*a*2.5f, (i-10) / 10f, 3.5f), Quaternion.identity);
+                var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x -a*3, (i - 10) / 10f, spawnPaperPosition.transform.position.z), Quaternion.identity);
                 paperList.Add(spawnedPaper);
                     spawnPaperTower--;
 
