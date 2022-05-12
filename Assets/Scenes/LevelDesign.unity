@@ -1352,8 +1352,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDamga: 0
   comboSpeed: 0.2
-  "damgaHakk\u0131": 0
+  damgaHakki: 0
+  elHakki: 0
   brokeDamga: 0
+  smokeParticle: {fileID: 0}
+  elHakkiText: {fileID: 0}
   damgaSpeed: 1
 --- !u!136 &1729471689
 CapsuleCollider:
@@ -5089,6 +5092,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2515761378217852347, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.87
+      objectReference: {fileID: 0}
     - target: {fileID: 3442862754494499396, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
       propertyPath: m_RootOrder
       value: 17
