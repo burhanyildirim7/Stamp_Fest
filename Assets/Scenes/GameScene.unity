@@ -642,6 +642,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752798645}
   m_CullTransparentMesh: 1
+--- !u!1 &779600421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 779600425}
+  - component: {fileID: 779600424}
+  - component: {fileID: 779600423}
+  - component: {fileID: 779600422}
+  m_Layer: 0
+  m_Name: SpawnPaperPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &779600422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779600421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &779600423
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779600421}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &779600424
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779600421}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &779600425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779600421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: -0.962, z: 4.84}
+  m_LocalScale: {x: 1, y: -0.12467956, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &812465360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4277412065456692, guid: b07739ad126c6ff46875821c2a3cd124, type: 3}
@@ -1143,7 +1240,7 @@ GameObject:
   - component: {fileID: 1617379699}
   - component: {fileID: 1617379698}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: CompeleteTable
   m_TagString: completedTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1358,13 +1455,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDamga: 0
-  comboSpeed: 0.1
-  damgaHakki: 0
-  elHakki: 10
   brokeDamga: 0
+  comboSpeed: 0.1
+  elHakki: 10
+  damgaSpeed: 1
+  damgaHakki: 0
   smokeParticle: {fileID: 191743185}
   elHakkiText: {fileID: 1860984139}
-  damgaSpeed: 1
+  handMaterial: {fileID: 2100000, guid: 2878902d2590e664c89fcfd647f9fefc, type: 2}
+  firstHandColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!136 &1729471689
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1642,6 +1741,10 @@ PrefabInstance:
       propertyPath: totalPointText
       value: 
       objectReference: {fileID: 1713292746}
+    - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
+      propertyPath: spawnPaperPosition
+      value: 
+      objectReference: {fileID: 779600421}
     - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
       propertyPath: paperList.Array.size
       value: 0
@@ -2206,7 +2309,7 @@ PrefabInstance:
     - target: {fileID: 2109358330287980470, guid: 424085c4555ff0546a96159131816011, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1037bedcb2916ac47903d4c26ac59573, type: 2}
+      objectReference: {fileID: 2100000, guid: 2878902d2590e664c89fcfd647f9fefc, type: 2}
     - target: {fileID: 4079912747812156324, guid: 424085c4555ff0546a96159131816011, type: 3}
       propertyPath: playOnAwake
       value: 1

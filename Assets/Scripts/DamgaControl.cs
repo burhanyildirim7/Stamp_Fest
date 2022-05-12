@@ -9,21 +9,34 @@ public class DamgaControl : MonoBehaviour
 {
     private Vector3 firstPositionDamga;
     private Vector3 firstRotationDamga;
+
     public bool canDamga = false;
-    public float comboSpeed;
-    public int damgaHakki;
-    public float elHakki;
     public bool brokeDamga = false;
+
+    public float comboSpeed;
+    public float elHakki;
+    public float damgaSpeed = 1f;
+    public int damgaHakki;
+
     public ParticleSystem smokeParticle;
+
     GameObject paperControl;
     GameObject PlayerController;
-    public Text elHakkiText;
-    float elHakkiDolmaSayacý = 0;
 
-    public float damgaSpeed = 1f;
+
+    public Text elHakkiText;
+
+    public Material handMaterial;
+    public Color firstHandColor;
+    
+
+
 
     void Start()
     {
+
+
+        firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
         firstRotationDamga = transform.eulerAngles;
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
@@ -128,13 +141,12 @@ public class DamgaControl : MonoBehaviour
     void DamgaBasmaFunction()
     {
 
-        transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/2).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/2)) ;
-        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-0.7f, transform.position.z), damgaSpeed/2).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/2)); // Damganýn basýlacaðý yer kodu
+        transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed)) ;
+        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-0.7f, transform.position.z), damgaSpeed).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed)); // Damganýn basýlacaðý yer kodu
 
         canDamga = false;
         
-     
-        elHakkiDolmaSayacý = 0;
+  
 
     }
 
@@ -165,9 +177,10 @@ public class DamgaControl : MonoBehaviour
 
             smokeParticle.transform.DOScale(new Vector3(1,1,1),1);
             smokeParticle.startColor = Color.Lerp(smokeParticle.startColor, Color.black, 0.5f * Time.deltaTime);
+            handMaterial.color = Color.Lerp(handMaterial.color, Color.red, 0.5f * Time.deltaTime);
 
-       
-           
+
+
         }
 
         if (elHakki< 5)
@@ -180,6 +193,7 @@ public class DamgaControl : MonoBehaviour
         {
             smokeParticle.Stop();
             smokeParticle.startColor = Color.white;
+            handMaterial.color = Color.Lerp(handMaterial.color, firstHandColor, 1 * Time.deltaTime);
         }
     }
 }
