@@ -35,6 +35,10 @@ public class DamgaControl : MonoBehaviour
     void Start()
     {
 
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Time.timeScale = 3;
+        }
 
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;

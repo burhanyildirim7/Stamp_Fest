@@ -18,6 +18,8 @@ TagManager:
   - completedTable
   - MainController
   - PaperControl
+  - Sekreter
+  - stackPaperPoint
   layers:
   - Default
   - TransparentFX

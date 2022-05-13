@@ -118,6 +118,8 @@ public class PaperControl : MonoBehaviour
             
                     paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
                         Damga.GetComponent<PlayerController>().startGame = true;
+                        GameObject.FindGameObjectWithTag("Sekreter").GetComponent<SekreterControl>().enabled = true;
+                       
 
                     });
               
@@ -138,6 +140,15 @@ public class PaperControl : MonoBehaviour
             }
       
 
+    }
+
+    public void DamgaliKagitlarSekretere()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            damgaliPaperList[i].transform.parent = GameObject.FindGameObjectWithTag("stackPaperPoint").transform; ///////////////
+            Debug.Log("Çalýþýyo");
+        }
     }
 
  
