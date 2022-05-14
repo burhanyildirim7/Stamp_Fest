@@ -67,14 +67,20 @@ public class PaperControl : MonoBehaviour
         }
 
         totalPointText.text = totalPoint + "";
+
+        
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
 
            
        
-        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
+        dolarAnim.GetComponent<TextMesh>().text = "$" + PlayerPrefs.GetInt("dolarMiktarý"); // Para animasyonu kaç olacaksa buraya yazýyoruz
       
         SendMainTable();   
+        }
+        else
+        {
+            PlayerPrefs.SetInt("dolarMiktarý" ,dolarMiktarý);
         }
       
     }

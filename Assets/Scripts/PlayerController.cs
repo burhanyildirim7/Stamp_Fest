@@ -95,13 +95,15 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();
         paperControl.GetComponent<PaperControl>().spawnPaperFunc();
+        paperControl.GetComponent<PaperControl>().dolarMiktarı = PlayerPrefs.GetInt("dolarMiktarı");
 
 
-       
-       
 
-       
-        
+
+
+
+
+
         GetComponent<DamgaControl>().elHakki = PlayerPrefs.GetFloat("elHakki"); ;
         GetComponent<DamgaControl>().elHakkiLimit = GetComponent<DamgaControl>().elHakki;
         GetComponent<DamgaControl>().damgaSpeed = 1;
