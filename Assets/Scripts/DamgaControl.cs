@@ -15,6 +15,7 @@ public class DamgaControl : MonoBehaviour
 
     public float comboSpeed;
     public float elHakki;
+    public float elHakkiLimit;
     public float damgaSpeed = 1f;
     public int damgaHakki;
 
@@ -35,10 +36,7 @@ public class DamgaControl : MonoBehaviour
     void Start()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Time.timeScale = 3;
-        }
+       
 
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
@@ -47,30 +45,45 @@ public class DamgaControl : MonoBehaviour
         PlayerController = GameObject.FindGameObjectWithTag("damga");
 
 
-       damgaHakki = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
-     
+        StartCoroutine(LateStart());
+        
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        damgaHakki = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
+        Debug.Log(paperControl.GetComponent<PaperControl>().spawnPaperNumber);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+      
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
-
-        if (elHakki >= 10)
+        if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
         {
-            elHakki = 10;
+            elHakki = elHakkiLimit;
+            PlayerPrefs.SetFloat("elHakki",elHakki);
+           
         }
-      /*
-        else if (elHakki<=0)
-        {
-            GameController.instance.isContinue = false; // Nedense çalýþmýyor.
-            PlayerController.GetComponent<PlayerController>().startGame = false;
-            UIController.instance.ActivateLooseScreen();
 
+        if (elHakki >= elHakkiLimit)
+        {
+            elHakki = elHakkiLimit;
         }
-      */
+        
+          else if (elHakki<=0)
+          {
+              GameController.instance.isContinue = false; // Nedense çalýþmýyor.
+              PlayerController.GetComponent<PlayerController>().startGame = false;
+              UIController.instance.ActivateLooseScreen();
+
+          }
+        
+
+       
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
           
@@ -122,7 +135,7 @@ public class DamgaControl : MonoBehaviour
 
 
 
-            if (damgaHakki < paperControl.GetComponent<PaperControl>().totalPoint)
+            if (damgaHakki <= paperControl.GetComponent<PaperControl>().totalPoint)
             {
 
                 // FINISH BURAYA GELECEK

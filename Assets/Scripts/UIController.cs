@@ -11,6 +11,10 @@ public class UIController : MonoBehaviour
     public Text gamePlayScoreText, winScreenScoreText, levelNoText, tapToStartScoreText, totalElmasText;
     public Animator ScoreTextAnim;
 
+    public GameObject upgradeIncome;
+    public GameObject upgradeStamina;
+    public GameObject blockClickWall;
+
 
 
 
@@ -18,7 +22,9 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-  
+
+     
+
         //else Destroy(this);
     }
 
@@ -46,6 +52,9 @@ public class UIController : MonoBehaviour
     // TAPTOSTART TUSUNA BASILDISINDA  --- GIRIS EKRANINDA VE LEVEL BASLARINDA
     public void TapToStartButtonClick()
     {
+        upgradeIncome.SetActive(false);
+        upgradeStamina.SetActive(false);
+        blockClickWall.SetActive(false);
         GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame = true;
         GameController.instance.isContinue = true;
         //PlayerController.instance.SetArmForGaming();
@@ -65,6 +74,7 @@ public class UIController : MonoBehaviour
         TapToStartPanel.SetActive(true);
         LevelController.instance.RestartLevelEvents();
         SetTapToStartScoreText();
+   
     }
 
 
@@ -77,6 +87,7 @@ public class UIController : MonoBehaviour
         GamePanel.SetActive(false);
         LevelController.instance.NextLevelEvents();
         StartCoroutine(StartScreenCoinEffect());
+
     }
 
 

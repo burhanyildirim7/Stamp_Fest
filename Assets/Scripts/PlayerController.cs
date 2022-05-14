@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
         paperControl.GetComponent<PaperControl>().totalPoint = 0;
         paperControl.GetComponent<PaperControl>().totalPointFake = 0;
-        paperControl.GetComponent<PaperControl>().spawnPaperNumber = 350;
+        paperControl.GetComponent<PaperControl>().spawnPaperNumber = 15;
         paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
         paperControl.GetComponent<PaperControl>().paperMoveSpeed = 1;
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
@@ -101,16 +101,20 @@ public class PlayerController : MonoBehaviour
        
 
        
-        GetComponent<DamgaControl>().elHakki = 10;
+        
+        GetComponent<DamgaControl>().elHakki = PlayerPrefs.GetFloat("elHakki"); ;
+        GetComponent<DamgaControl>().elHakkiLimit = GetComponent<DamgaControl>().elHakki;
         GetComponent<DamgaControl>().damgaSpeed = 1;
         GetComponent<DamgaControl>().canDamga = false;
         GetComponent<DamgaControl>().smokeParticle.Stop();
         GetComponent<DamgaControl>().handMaterial.color = Color.blue;
         GetComponent<DamgaControl>().firstHandColor = Color.blue;
-        
-       
-       
-       
+
+
+
+        UIController.instance.upgradeIncome.SetActive(true);
+        UIController.instance.upgradeStamina.SetActive(true);
+        UIController.instance.blockClickWall.SetActive(true);
 
     }
 

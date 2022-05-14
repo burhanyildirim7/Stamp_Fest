@@ -28,6 +28,8 @@ public class PaperControl : MonoBehaviour
     public GameObject paperObje3;
     public GameObject dolarAnim;
     public GameObject sekreter;
+
+    int paperSiraNumber = 50;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
     public int dolarMiktarý;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
@@ -98,7 +100,7 @@ public class PaperControl : MonoBehaviour
         paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         totalPoint++;
         totalPointFake++;
-        if (damgaPaperSayisi == 100)
+        if (damgaPaperSayisi == paperSiraNumber)
         {
             StartCoroutine(Swerve());
         }
@@ -113,7 +115,7 @@ public class PaperControl : MonoBehaviour
         paperMoveSpeed = Mathf.Clamp(paperMoveSpeed,0.1f,1);
 
         Damga.GetComponent<PlayerController>().startGame = false;
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(paperMoveSpeed);
         
         totalPointFake = 0;
             for (int i = 0; i < paperList.Count; i++)
@@ -123,7 +125,7 @@ public class PaperControl : MonoBehaviour
             if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETÝ BURADA
             {
             
-                    paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
+                    paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, paperMoveSpeed).OnComplete(() => {
                         Damga.GetComponent<PlayerController>().startGame = true;
                         
 
@@ -139,7 +141,7 @@ public class PaperControl : MonoBehaviour
             }
             else  // DAMGALILARIN HAREKETÝ BURADA
             {
-                damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.7f), 1, 1, 0.5f).OnComplete(() => {
+                damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
                    
                     Damga.GetComponent<PlayerController>().startGame = true;
                     for (int a = 0; a < damgaliPaperList.Length; a++)
@@ -159,7 +161,7 @@ public class PaperControl : MonoBehaviour
 
     public void DamgaliKagitlarSekretere()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < paperSiraNumber; i++)
         {
             damgaliPaperList[i].transform.parent = GameObject.FindGameObjectWithTag("stackPaperPoint").transform;
             Debug.Log("Çalýþýyo");
@@ -172,15 +174,15 @@ public class PaperControl : MonoBehaviour
  
     public void spawnPaperFunc()
     {
-     
-        for (int a = 0; a < (spawnPaperNumber / 100)+2; a++)
+    
+        for (int a = 0; a < (spawnPaperNumber / paperSiraNumber) +2; a++)
         {
           
 
-            if (spawnPaperTower > 100)
+            if (spawnPaperTower > paperSiraNumber)
             {
 
-                for (int i = 100; i > 0; i--)
+                for (int i = paperSiraNumber; i > 0; i--)
                 {
                     RandomPaperChoose();
                     var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x-a*3, (i-10) / 10f, spawnPaperPosition.transform.position.z), Quaternion.identity);
@@ -189,7 +191,7 @@ public class PaperControl : MonoBehaviour
                 
                 }
             }
-        else if(spawnPaperTower < 100)
+        else if(spawnPaperTower < paperSiraNumber)
         {
             for (int i = spawnPaperTower; i > 0; i--)
             {
