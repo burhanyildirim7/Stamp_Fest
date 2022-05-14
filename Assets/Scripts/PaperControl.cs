@@ -27,6 +27,7 @@ public class PaperControl : MonoBehaviour
     public GameObject paperObje2;
     public GameObject paperObje3;
     public GameObject dolarAnim;
+    public GameObject sekreter;
     public int dolarMiktarý;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
@@ -52,6 +53,12 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (var i = paperList.Count - 1; i > -1; i--)
+        {
+            if (paperList[i] == null)
+                paperList.RemoveAt(i);
+        }
+
         if (paperMoveSpeed >= 1f)
         {
             paperMoveSpeed = 1f;
@@ -106,20 +113,20 @@ public class PaperControl : MonoBehaviour
         paperMoveSpeed = Mathf.Clamp(paperMoveSpeed,0.1f,1);
 
         Damga.GetComponent<PlayerController>().startGame = false;
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(1f);
         
         totalPointFake = 0;
             for (int i = 0; i < paperList.Count; i++)
             {
             damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
-
+    
             if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETÝ BURADA
             {
             
                     paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, 0.5f).OnComplete(() => {
                         Damga.GetComponent<PlayerController>().startGame = true;
-                        GameObject.FindGameObjectWithTag("Sekreter").GetComponent<SekreterControl>().enabled = true;
-                       
+                        
+
 
                     });
               
@@ -133,22 +140,33 @@ public class PaperControl : MonoBehaviour
             else  // DAMGALILARIN HAREKETÝ BURADA
             {
                 damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.7f), 1, 1, 0.5f).OnComplete(() => {
+                   
                     Damga.GetComponent<PlayerController>().startGame = true;
+                    for (int a = 0; a < damgaliPaperList.Length; a++)
+                    {
+                        paperList.Remove(damgaliPaperList[a]);
+                    }
                 });
+              
+                
             }
           
             }
-      
-
+     
+        currentPaperNumber = 0;
+        Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
     }
 
     public void DamgaliKagitlarSekretere()
     {
         for (int i = 0; i < 100; i++)
         {
-            damgaliPaperList[i].transform.parent = GameObject.FindGameObjectWithTag("stackPaperPoint").transform; ///////////////
+            damgaliPaperList[i].transform.parent = GameObject.FindGameObjectWithTag("stackPaperPoint").transform;
             Debug.Log("Çalýþýyo");
         }
+
+        
+
     }
 
  

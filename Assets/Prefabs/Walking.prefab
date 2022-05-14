@@ -1999,7 +1999,7 @@ GameObject:
   - component: {fileID: 3884142974897525250}
   m_Layer: 0
   m_Name: Walking
-  m_TagString: Untagged
+  m_TagString: Sekreter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2067,8 +2067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd3c2f62845b8d469c0a07fbb3ce545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTablePoint: {fileID: 0}
-  leavePerspectivePoint: {fileID: 0}
+  sekreterSpawnPoint: {x: 19, y: -10, z: 23}
 --- !u!1 &4122243039144026879
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,24 +8,19 @@ public class SekreterControl : MonoBehaviour
     Animator sekreterAnim;
     bool isWalk = false;
 
-    public Transform targetTablePoint;
-    public Transform leavePerspectivePoint;
-
+     Transform targetTablePoint;
+     Transform leavePerspectivePoint;
+     public Vector3 sekreterSpawnPoint;
      void Start()
     {
         sekreterAnim = GetComponent<Animator>();
-     
+        targetTablePoint = GameObject.FindGameObjectWithTag("tablePoint").transform;
+        leavePerspectivePoint = GameObject.FindGameObjectWithTag("door").transform;
        
         WalkToTable();
     }
 
-     void Update()
-    {
-    
-
-
-    }
-
+  
     void WalkToTable()
     {
 
@@ -47,7 +42,10 @@ public class SekreterControl : MonoBehaviour
     {
         transform.LookAt(leavePerspectivePoint);
         sekreterAnim.SetBool("switchWalkToIdle", true);
-        transform.DOMove(leavePerspectivePoint.transform.position, 3);
+        transform.DOMove(leavePerspectivePoint.transform.position, 3).OnComplete(()=> {
+            Destroy(gameObject);
+       
+        });
     }
 
     IEnumerator HandsUp()
@@ -56,7 +54,7 @@ public class SekreterControl : MonoBehaviour
         sekreterAnim.SetBool("handsUp", true);
       
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().DamgaliKagitlarSekretere();
         sekreterAnim.SetBool("switchWalkToIdle", false);
         WalkToDoor();

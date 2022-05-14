@@ -70,6 +70,7 @@ MonoBehaviour:
   paperObje2: {fileID: 5290359023668015005, guid: 71360ff6e5ae1eb49b6eac162a7e3e78, type: 3}
   paperObje3: {fileID: 2846605401527329592, guid: ad3891a7c9ee3b744abd90004c0b012e, type: 3}
   dolarAnim: {fileID: 9071883545934028408, guid: 465f07ac16e00d14d8b63d438747654f, type: 3}
+  sekreter: {fileID: 4118074177142330404, guid: 865a818a5920cd74fae648a703855d2a, type: 3}
   "dolarMiktar\u0131": 15
   currentPaperNumber: 0
   damgaPaperSayisi: 0
