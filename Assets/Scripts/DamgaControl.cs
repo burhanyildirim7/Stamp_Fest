@@ -17,8 +17,8 @@ public class DamgaControl : MonoBehaviour
     public float elHakki;
     public float elHakkiLimit;
     public float damgaSpeed = 1f;
-    public int damgaHakki;
-
+    public int damgaHakki = 5;
+    public int damgaLevel = 1;
     public ParticleSystem smokeParticle;
 
     GameObject paperControl;
@@ -35,35 +35,54 @@ public class DamgaControl : MonoBehaviour
 
     void Start()
     {
-
-       
-
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
         firstRotationDamga = transform.eulerAngles;
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
+        damgaHakki = 5;
+        PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+        elHakki = 10;
+        PlayerPrefs.SetFloat("elHakki", elHakki);
+        damgaLevel = 1;
+        PlayerPrefs.SetInt("damgaLevel", damgaLevel);
 
-
-        StartCoroutine(LateStart());
-        
     }
 
-    IEnumerator LateStart()
-    {
-        yield return new WaitForSeconds(0.1f);
-        damgaHakki = paperControl.GetComponent<PaperControl>().spawnPaperNumber - 5;
-        Debug.Log(paperControl.GetComponent<PaperControl>().spawnPaperNumber);
-    }
-
+ 
     // Update is called once per frame
     void Update()
     {
-      
+        Debug.Log(damgaLevel);
+        if (damgaLevel == 1)
+        {
+            damgaHakki = 5;
+            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+        }
+
+        else if (damgaLevel == 2)
+        {
+            damgaHakki = 7;
+            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+        }
+
+
+        else if (damgaLevel == 3)
+        {
+            damgaHakki = 9;
+            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+        }
+
+
+
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
         {
+          
             elHakki = elHakkiLimit;
             PlayerPrefs.SetFloat("elHakki",elHakki);
            

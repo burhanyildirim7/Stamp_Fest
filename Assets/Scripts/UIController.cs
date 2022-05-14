@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
 
     public GameObject upgradeIncome;
     public GameObject upgradeStamina;
+    public GameObject upgradeStamp;
     public GameObject blockClickWall;
 
 
@@ -55,6 +56,7 @@ public class UIController : MonoBehaviour
         upgradeIncome.SetActive(false);
         upgradeStamina.SetActive(false);
         blockClickWall.SetActive(false);
+        upgradeStamp.SetActive(false);
         GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame = true;
         GameController.instance.isContinue = true;
         //PlayerController.instance.SetArmForGaming();

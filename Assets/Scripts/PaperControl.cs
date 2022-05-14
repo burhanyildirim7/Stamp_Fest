@@ -22,6 +22,7 @@ public class PaperControl : MonoBehaviour
 
     public Text totalPointText;
 
+
     public float paperMoveSpeed = 1;
     public GameObject paperObje;
     public GameObject paperObje2;
@@ -48,13 +49,15 @@ public class PaperControl : MonoBehaviour
         UIController = GameObject.FindGameObjectWithTag("UIController");
        
         spawnPaperTower = spawnPaperNumber;
-
+        dolarMiktarý = 15;
+        PlayerPrefs.SetInt("dolarMiktarý", dolarMiktarý);
        // spawnPaperFunc();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         for (var i = paperList.Count - 1; i > -1; i--)
         {
             if (paperList[i] == null)
@@ -74,7 +77,7 @@ public class PaperControl : MonoBehaviour
 
            
        
-        dolarAnim.GetComponent<TextMesh>().text = "$" + PlayerPrefs.GetInt("dolarMiktarý"); // Para animasyonu kaç olacaksa buraya yazýyoruz
+        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
       
         SendMainTable();   
         }

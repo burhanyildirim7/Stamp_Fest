@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool xVarMi = true;
     public bool collectibleVarMi = true;
     public bool startGame = false;
-    
+    int gameLevel = 1;
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -71,11 +71,7 @@ public class PlayerController : MonoBehaviour
 
      void Update()
     {
-        if (GameObject.FindGameObjectWithTag("damga").GetComponent<DamgaControl>().brokeDamga)
-        {
-            //WinFinish();
-      
-        }
+        
       
         
     }
@@ -85,12 +81,17 @@ public class PlayerController : MonoBehaviour
     public void StartingEvents()
     {
         GameObject paperControl = GameObject.FindGameObjectWithTag("PaperControl");
+
+        if (gameLevel == 1)
+        {
+            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 10;
+            paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
+        }
+
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
         paperControl.GetComponent<PaperControl>().totalPoint = 0;
         paperControl.GetComponent<PaperControl>().totalPointFake = 0;
-        paperControl.GetComponent<PaperControl>().spawnPaperNumber = 15;
-        paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
         paperControl.GetComponent<PaperControl>().paperMoveSpeed = 1;
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();
@@ -104,7 +105,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-        GetComponent<DamgaControl>().elHakki = PlayerPrefs.GetFloat("elHakki"); ;
+        GetComponent<DamgaControl>().elHakki = PlayerPrefs.GetFloat("elHakki"); 
+        GetComponent<DamgaControl>().damgaHakki = PlayerPrefs.GetInt("damgaHakki"); 
+        GetComponent<DamgaControl>().damgaLevel = PlayerPrefs.GetInt("damgaLevel"); 
         GetComponent<DamgaControl>().elHakkiLimit = GetComponent<DamgaControl>().elHakki;
         GetComponent<DamgaControl>().damgaSpeed = 1;
         GetComponent<DamgaControl>().canDamga = false;
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
         UIController.instance.upgradeIncome.SetActive(true);
         UIController.instance.upgradeStamina.SetActive(true);
         UIController.instance.blockClickWall.SetActive(true);
+        UIController.instance.upgradeStamp.SetActive(true);
 
     }
 
