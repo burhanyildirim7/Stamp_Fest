@@ -134,7 +134,14 @@ public class PaperControl : MonoBehaviour
                     damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z + 2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
 
                         Damga.GetComponent<PlayerController>().startGame = true;
-                      
+                       
+                        
+                        for (int a = 0; a < damgaliPaperList.Length; a++)
+                        {
+                            paperList.Remove(damgaliPaperList[a]);
+                        }
+                        currentPaperNumber = 0;
+                        Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
 
 
                     });
@@ -164,7 +171,7 @@ public class PaperControl : MonoBehaviour
         Damga.GetComponent<PlayerController>().startGame = false;
         yield return new WaitForSecondsRealtime(paperMoveSpeed);
         
-        totalPointFake = 0;
+      
             for (int i = 0; i < paperList.Count; i++)
             {
             damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
@@ -188,6 +195,7 @@ public class PaperControl : MonoBehaviour
             }
             else  // DAMGALILARIN HAREKETÝ BURADA
             {
+                /*
                 damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
                    
                     Damga.GetComponent<PlayerController>().startGame = true;
@@ -197,13 +205,13 @@ public class PaperControl : MonoBehaviour
                     }
                 });
               
-                
+                */
             }
           
             }
      
-        currentPaperNumber = 0;
-        Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
+       
+        //Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
     }
 
     public void DamgaliKagitlarSekretere()
