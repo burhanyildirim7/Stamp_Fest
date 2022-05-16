@@ -49,8 +49,12 @@ public class PaperControl : MonoBehaviour
         UIController = GameObject.FindGameObjectWithTag("UIController");
        
         spawnPaperTower = spawnPaperNumber;
-        dolarMiktarý = 15;
-        PlayerPrefs.SetInt("dolarMiktarý", dolarMiktarý);
+        if (PlayerPrefs.GetInt("dolarMiktarý")<=15)
+        {
+            dolarMiktarý = 15;
+            PlayerPrefs.SetInt("dolarMiktarý", dolarMiktarý);
+        }
+   
        // spawnPaperFunc();
     }
 
@@ -107,11 +111,12 @@ public class PaperControl : MonoBehaviour
      
         damgaPaperSayisi++;
         Instantiate(dolarAnim, paperList[currentPaperNumber].transform.position, Quaternion.identity);
-        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + damgaliPaperList.Length / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
+        //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + damgaliPaperList.Length / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         totalPoint++;
         PlayerPrefs.SetInt("totalPoint", totalPoint);
         totalPointFake++;
+        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         PlayerPrefs.SetInt("totalPointFake", totalPointFake);
         if (damgaPaperSayisi == paperSiraNumber)
         {

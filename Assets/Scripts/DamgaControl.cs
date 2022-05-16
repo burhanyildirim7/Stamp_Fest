@@ -42,12 +42,7 @@ public class DamgaControl : MonoBehaviour
         firstRotationDamga = transform.eulerAngles;
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
-        damgaHakki = 5;
-        PlayerPrefs.SetInt("damgaHakki", damgaHakki);
-        elHakki = 10;
-        PlayerPrefs.SetFloat("elHakki", elHakki);
-        damgaLevel = 1;
-        PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+   
 
     }
 
@@ -176,15 +171,23 @@ public class DamgaControl : MonoBehaviour
 
         for (int i = 1; i <= damgalar.Count; i++)
         {
-            if (damgaLevel == i)
+            if (damgaLevel >= 9)
+            {
+                damgalar[8].SetActive(true);
+                damgalar[7].SetActive(false);
+                damgaLevel = 9;
+            }
+        
+           
+            else if (damgaLevel == i)
             {
                 damgaHakki = (i * 2) + 3;
 
                 for (int a = 0; a < damgalar.Count; a++)
                 {
-                    if (damgalar[damgaLevel - 1].activeSelf == false)
+                    if (damgalar[i-1].activeSelf==false)
                     {
-                        damgalar[damgaLevel - 1].SetActive(true);
+                        damgalar[i-1].SetActive(true);
                     }
                     else
                     {
@@ -195,7 +198,7 @@ public class DamgaControl : MonoBehaviour
                 PlayerPrefs.SetInt("damgaLevel", damgaLevel);
             }
         }
-    }
+        }
         void DamgaBasmaFunction()
     {
        
