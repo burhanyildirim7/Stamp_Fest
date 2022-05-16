@@ -33,15 +33,43 @@ public class PaperControl : MonoBehaviour
     int paperSiraNumber = 20;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
     int damgaliPaperTransform = 0;
     public int dolarMiktarý;
+    int gameLevel = 1;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
-    
 
+    int geriyeKalanPaperNumber;
     GameObject Table;
     GameObject Damga;
     GameObject CompletedTable;
     GameObject PlayerController;
     GameObject UIController;
+
+     void Awake()
+    {
+        if (gameLevel == 1)
+        {
+            spawnPaperNumber = 50;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+
+            //spawnPaperTower = spawnPaperNumber;
+            PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
+        }
+
+        else if (gameLevel == 2)
+        {
+            spawnPaperNumber = 150;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+
+            //spawnPaperTower = spawnPaperNumber;
+            PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
+        }
+
+        else if (gameLevel == 3)
+        {
+            spawnPaperNumber = 250;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+
+            //spawnPaperTower = spawnPaperNumber;
+            PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
+        }
+    }
     void Start()
     {
     
@@ -50,7 +78,7 @@ public class PaperControl : MonoBehaviour
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
         UIController = GameObject.FindGameObjectWithTag("UIController");
        
-        spawnPaperTower = spawnPaperNumber;
+       
         if (PlayerPrefs.GetInt("dolarMiktarý")<=15)
         {
             dolarMiktarý = 15;
@@ -61,14 +89,23 @@ public class PaperControl : MonoBehaviour
         {
             totalPointFake = 0;
         }
-   
-       // spawnPaperFunc();
+
+      
+            
+       
+
+        // spawnPaperFunc();
     }
 
     // Update is called once per frame
     void Update()
     {
         damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
+
+        if (spawnPaperNumber<=0)
+        {
+            Debug.Log("OYUN BÝTTÝ");
+        }
 
         for (var i = paperList.Count - 1; i > -1; i--)
         {
@@ -126,8 +163,10 @@ public class PaperControl : MonoBehaviour
         paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { 
             sendPaperToTable = true;
             currentPaperNumber++;
-            
-             if (damgaliPaperList.Length >= paperSiraNumber && totalPointFake >= paperSiraNumber)
+            spawnPaperNumber--;
+            PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
+
+            if (damgaliPaperList.Length >= paperSiraNumber && totalPointFake >= paperSiraNumber)
             {
                 for (int i = 0; i < damgaliPaperList.Length; i++)
                 {

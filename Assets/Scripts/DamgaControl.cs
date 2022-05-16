@@ -84,7 +84,7 @@ public class DamgaControl : MonoBehaviour
         {
             elHakki = elHakkiLimit;
         }
-        /*
+        
           else if (elHakki<=0)
           {
               GameController.instance.isContinue = false; // Nedense çalýþmýyor.
@@ -92,7 +92,7 @@ public class DamgaControl : MonoBehaviour
               UIController.instance.ActivateLooseScreen();
 
           }
-        */
+        
 
        
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)

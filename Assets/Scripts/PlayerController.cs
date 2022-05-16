@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool xVarMi = true;
     public bool collectibleVarMi = true;
     public bool startGame = false;
-    int gameLevel = 1;
+   //int gameLevel = 1;
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -82,11 +82,10 @@ public class PlayerController : MonoBehaviour
     {
         GameObject paperControl = GameObject.FindGameObjectWithTag("PaperControl");
 
-        if (gameLevel == 1)
-        {
-            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 50;    // SPAWN EDİLECEK KAĞIT SAYISI
+       
+            paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
             paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
-        }
+        
 
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
