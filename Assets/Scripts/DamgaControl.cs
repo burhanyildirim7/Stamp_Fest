@@ -13,6 +13,8 @@ public class DamgaControl : MonoBehaviour
     public bool canDamga = false;
     public bool brokeDamga = false;
 
+    public List<GameObject> damgalar = new List<GameObject>();
+
     public float comboSpeed;
     public float elHakki;
     public float elHakkiLimit;
@@ -53,31 +55,26 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(damgaLevel);
-        if (damgaLevel == 1)
+        if (elHakkiLimit < 10)
+        {
+            elHakkiLimit = 10;
+
+        }
+
+        if (damgaHakki == 0)
         {
             damgaHakki = 5;
-            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
-            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
         }
 
-        else if (damgaLevel == 2)
+        if (damgaLevel == 0)
         {
-            damgaHakki = 7;
-            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
-            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+            damgaLevel = 1;
         }
 
+        Debug.Log(damgaLevel);
+      
 
-        else if (damgaLevel == 3)
-        {
-            damgaHakki = 9;
-            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
-            PlayerPrefs.SetInt("damgaLevel", damgaLevel);
-        }
-
-
-
+        DamgaLevelFunction();
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
@@ -174,7 +171,32 @@ public class DamgaControl : MonoBehaviour
     
     }
 
-    void DamgaBasmaFunction()
+    void DamgaLevelFunction()
+    {
+
+        for (int i = 1; i <= damgalar.Count; i++)
+        {
+            if (damgaLevel == i)
+            {
+                damgaHakki = (i * 2) + 3;
+
+                for (int a = 0; a < damgalar.Count; a++)
+                {
+                    if (damgalar[damgaLevel - 1].activeSelf == false)
+                    {
+                        damgalar[damgaLevel - 1].SetActive(true);
+                    }
+                    else
+                    {
+                        damgalar[a].SetActive(false);
+                    }
+                }
+                PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+                PlayerPrefs.SetInt("damgaLevel", damgaLevel);
+            }
+        }
+    }
+        void DamgaBasmaFunction()
     {
        
         transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/1.5f).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/ 1.5f)) ;

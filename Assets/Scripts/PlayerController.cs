@@ -84,14 +84,14 @@ public class PlayerController : MonoBehaviour
 
         if (gameLevel == 1)
         {
-            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 10;
+            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 15;
             paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
         }
 
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
-        paperControl.GetComponent<PaperControl>().totalPoint = 0;
-        paperControl.GetComponent<PaperControl>().totalPointFake = 0;
+        paperControl.GetComponent<PaperControl>().totalPoint = PlayerPrefs.GetInt("totalPoint");
+        paperControl.GetComponent<PaperControl>().totalPointFake = PlayerPrefs.GetInt("totalPointFake");
         paperControl.GetComponent<PaperControl>().paperMoveSpeed = 1;
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();

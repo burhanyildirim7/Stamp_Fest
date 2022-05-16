@@ -5689,6 +5689,10 @@ PrefabInstance:
       propertyPath: elHakkiLimit
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8975822806148686282, guid: 68ebe2c3c68761646ad3c79c07d514e9, type: 3}
+      propertyPath: damgalar.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8975822806148686286, guid: 68ebe2c3c68761646ad3c79c07d514e9, type: 3}
       propertyPath: m_RootOrder
       value: 11
