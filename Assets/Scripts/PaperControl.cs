@@ -30,10 +30,12 @@ public class PaperControl : MonoBehaviour
     public GameObject dolarAnim;
     public GameObject sekreter;
 
-    int paperSiraNumber = 10;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
+    int paperSiraNumber = 20;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
+    int damgaliPaperTransform = 0;
     public int dolarMiktarý;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
+    
 
     GameObject Table;
     GameObject Damga;
@@ -42,7 +44,7 @@ public class PaperControl : MonoBehaviour
     GameObject UIController;
     void Start()
     {
-        
+    
         Table = GameObject.FindGameObjectWithTag("table");
         Damga = GameObject.FindGameObjectWithTag("damga");
         CompletedTable = GameObject.FindGameObjectWithTag("completedTable");
@@ -53,6 +55,11 @@ public class PaperControl : MonoBehaviour
         {
             dolarMiktarý = 15;
             PlayerPrefs.SetInt("dolarMiktarý", dolarMiktarý);
+        }
+
+        if (damgaliPaperList.Length <= 0)
+        {
+            totalPointFake = 0;
         }
    
        // spawnPaperFunc();
@@ -116,12 +123,34 @@ public class PaperControl : MonoBehaviour
         totalPoint++;
         PlayerPrefs.SetInt("totalPoint", totalPoint);
         totalPointFake++;
-        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
+        paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { 
+            sendPaperToTable = true;
+            currentPaperNumber++;
+            
+             if (damgaliPaperList.Length >= paperSiraNumber && totalPointFake >= paperSiraNumber)
+            {
+                for (int i = 0; i < damgaliPaperList.Length; i++)
+                {
+                    damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z + 2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
+
+                        Damga.GetComponent<PlayerController>().startGame = true;
+                      
+
+
+                    });
+
+                }
+                totalPointFake = 0;
+            }
+            damgaliPaperTransform++;
+        });
         PlayerPrefs.SetInt("totalPointFake", totalPointFake);
         if (damgaPaperSayisi == paperSiraNumber)
         {
             StartCoroutine(Swerve());
         }
+
+      
     }
 
 

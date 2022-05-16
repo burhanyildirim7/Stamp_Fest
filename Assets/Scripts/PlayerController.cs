@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (gameLevel == 1)
         {
-            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 15;
+            paperControl.GetComponent<PaperControl>().spawnPaperNumber = 50;    // SPAWN EDİLECEK KAĞIT SAYISI
             paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
         }
 

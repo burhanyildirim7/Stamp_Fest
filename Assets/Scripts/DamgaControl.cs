@@ -69,12 +69,12 @@ public class DamgaControl : MonoBehaviour
         Debug.Log(damgaLevel);
       
 
-        DamgaLevelFunction();
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
         {
-          
+
+            DamgaLevelFunction();
             elHakki = elHakkiLimit;
             PlayerPrefs.SetFloat("elHakki",elHakki);
            
@@ -84,7 +84,7 @@ public class DamgaControl : MonoBehaviour
         {
             elHakki = elHakkiLimit;
         }
-        
+        /*
           else if (elHakki<=0)
           {
               GameController.instance.isContinue = false; // Nedense çalýþmýyor.
@@ -92,7 +92,7 @@ public class DamgaControl : MonoBehaviour
               UIController.instance.ActivateLooseScreen();
 
           }
-        
+        */
 
        
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
@@ -146,7 +146,7 @@ public class DamgaControl : MonoBehaviour
 
 
 
-            if (damgaHakki <= paperControl.GetComponent<PaperControl>().totalPoint)
+            if (PlayerPrefs.GetInt("damgaHakki") <= 0)
             {
 
                 // FINISH BURAYA GELECEK
@@ -176,6 +176,9 @@ public class DamgaControl : MonoBehaviour
                 damgalar[8].SetActive(true);
                 damgalar[7].SetActive(false);
                 damgaLevel = 9;
+                damgaHakki = 50;
+                PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+                PlayerPrefs.SetInt("damgaLevel", damgaLevel);
             }
         
            
@@ -204,7 +207,7 @@ public class DamgaControl : MonoBehaviour
        
         transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/1.5f).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/ 1.5f)) ;
         transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-0.7f, transform.position.z), damgaSpeed/ 1.5f).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/ 1.5f)); // Damganýn basýlacaðý yer kodu
-
+       
         canDamga = false;
         
   
@@ -217,6 +220,8 @@ public class DamgaControl : MonoBehaviour
         {
             paperControl.GetComponent<PaperControl>().MoveCompleteTable();
             other.gameObject.tag = "damgaVar";
+            damgaHakki--;
+            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
             elHakki--;
         }
   
