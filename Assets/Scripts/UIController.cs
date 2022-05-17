@@ -41,6 +41,12 @@ public class UIController : MonoBehaviour
    
     }
 
+     void Update()
+    {
+     
+       SetTapToStartScoreText();
+    }
+
     /// <summary>
     /// Level numarasini ui kisminda degistirmek icin fonksiyon. Parametre olarak level numarasi aliyor.
     /// </summary>
@@ -53,6 +59,7 @@ public class UIController : MonoBehaviour
     // TAPTOSTART TUSUNA BASILDISINDA  --- GIRIS EKRANINDA VE LEVEL BASLARINDA
     public void TapToStartButtonClick()
     {
+     
         upgradeIncome.SetActive(false);
         upgradeStamina.SetActive(false);
         blockClickWall.SetActive(false);
@@ -98,6 +105,7 @@ public class UIController : MonoBehaviour
     /// </summary>
     public void SetGamePlayScoreText()
     {
+    
         gamePlayScoreText.text = PlayerPrefs.GetInt("totalScore").ToString();
     }
 
@@ -107,6 +115,7 @@ public class UIController : MonoBehaviour
     /// </summary>
     public void SetTapToStartScoreText()
     {
+      
         tapToStartScoreText.text = PlayerPrefs.GetInt("totalScore").ToString();
     }
 
@@ -115,7 +124,8 @@ public class UIController : MonoBehaviour
     /// </summary>
     public void WinScreenScore()
     {
-        winScreenScoreText.text = GameController.instance.score.ToString();
+         winScreenScoreText.text = GameController.instance.score.ToString();
+        
     }
 
     /// <summary>
@@ -142,8 +152,8 @@ public class UIController : MonoBehaviour
         int sayac = 0;
         while (sayac < GameController.instance.score)
         {
-            sayac += PlayerController.instance.collectibleDegeri;
-            if (sayac % 2 * PlayerController.instance.collectibleDegeri == 0)
+            sayac += 5;
+            if (sayac % 2 * 5 == 0)
             {
                 GameObject effectObj = Instantiate(winScreenEffectObject, new Vector3(144, 400, 0), Quaternion.identity, winScreenCoinImage.transform);
                 effectObj.transform.localPosition = new Vector3(144, 300, 0);

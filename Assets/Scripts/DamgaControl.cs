@@ -37,6 +37,7 @@ public class DamgaControl : MonoBehaviour
 
     void Start()
     {
+     
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
         firstRotationDamga = transform.eulerAngles;
@@ -50,6 +51,7 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (elHakkiLimit < 10)
         {
             elHakkiLimit = 10;
@@ -66,7 +68,7 @@ public class DamgaControl : MonoBehaviour
             damgaLevel = 1;
         }
 
-        Debug.Log(damgaLevel);
+
       
 
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
@@ -155,10 +157,12 @@ public class DamgaControl : MonoBehaviour
 
                 GameController.instance.isContinue = false;
                 PlayerController.GetComponent<PlayerController>().startGame = false;
-                GameController.instance.SetScore(100);
-                GameController.instance.ScoreCarp(1);
+               
+                GameController.instance.SetScore(15);
+                //GameController.instance.ScoreCarp(1);
 
                 UIController.instance.ActivateWinScreen();
+
             }
         }
 

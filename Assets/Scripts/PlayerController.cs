@@ -71,8 +71,8 @@ public class PlayerController : MonoBehaviour
 
      void Update()
     {
-        
-      
+
+        PlayerPrefs.GetInt("totalScore");
         
     }
     /// <summary>
@@ -85,8 +85,8 @@ public class PlayerController : MonoBehaviour
        
             paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
             paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
-        
 
+        
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
         paperControl.GetComponent<PaperControl>().totalPoint = PlayerPrefs.GetInt("totalPoint");
@@ -97,10 +97,9 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().spawnPaperFunc();
         paperControl.GetComponent<PaperControl>().dolarMiktarı = PlayerPrefs.GetInt("dolarMiktarı");
 
-
-
-
-
+        paperControl.GetComponent<PaperControl>().anlikKazanc = 0;
+        PlayerPrefs.SetInt("anlikKazanc", paperControl.GetComponent<PaperControl>().anlikKazanc);
+       
 
 
 

@@ -16,7 +16,16 @@ public class UpgradeStamp : MonoBehaviour
 
 	void TaskOnClick()
 	{
-		Damga.GetComponent<DamgaControl>().damgaLevel++;
-		
+
+        if (PlayerPrefs.GetInt("totalScore")< 50)
+        {
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore"));
+		}
+        else
+        {
+			Damga.GetComponent<DamgaControl>().damgaLevel++;
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore") - 50);
+		}
+	
 	}
 }

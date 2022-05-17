@@ -14,7 +14,19 @@ public class UpgradeIncome : MonoBehaviour
 
 	void TaskOnClick()
 	{
-		GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktarý += 5;
-		PlayerPrefs.SetInt("dolarMiktarý", GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktarý);
+		
+
+		if (PlayerPrefs.GetInt("totalScore") < 50)
+		{
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore"));
+		}
+		else
+		{
+			GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktarý += 5;
+			PlayerPrefs.SetInt("dolarMiktarý", GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktarý);
+
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore") - 50);
+		}
+
 	}
 }

@@ -17,8 +17,17 @@ public class UpgradeStamina : MonoBehaviour
 	void TaskOnClick()
 	{
 		GameController.instance.isContinue = false;
-		Damga.GetComponent<DamgaControl>().elHakkiLimit++;
-		
-		
+	
+
+		if (PlayerPrefs.GetInt("totalScore") < 50)
+		{
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore"));
+		}
+		else
+		{
+			Damga.GetComponent<DamgaControl>().elHakkiLimit++;
+			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore") - 50);
+		}
+
 	}
 }

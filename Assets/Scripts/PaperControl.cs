@@ -30,6 +30,8 @@ public class PaperControl : MonoBehaviour
     public GameObject dolarAnim;
     public GameObject sekreter;
 
+    int totalMoney;
+    public int anlikKazanc;
     int paperSiraNumber = 20;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
     int damgaliPaperTransform = 0;
     public int dolarMiktarý;
@@ -127,7 +129,10 @@ public class PaperControl : MonoBehaviour
            
        
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
-      
+           
+
+
+
         SendMainTable();   
         }
         else
@@ -155,6 +160,10 @@ public class PaperControl : MonoBehaviour
      
         damgaPaperSayisi++;
         Instantiate(dolarAnim, paperList[currentPaperNumber].transform.position, Quaternion.identity);
+        totalMoney += dolarMiktarý;
+        anlikKazanc += dolarMiktarý;
+        PlayerPrefs.SetInt("totalMoney", totalMoney); 
+        PlayerPrefs.SetInt("anlikKazanc", anlikKazanc); 
         //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + damgaliPaperList.Length / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + totalPointFake / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
         totalPoint++;
@@ -258,7 +267,7 @@ public class PaperControl : MonoBehaviour
         for (int i = 0; i < paperSiraNumber; i++)
         {
             damgaliPaperList[i].transform.parent = GameObject.FindGameObjectWithTag("stackPaperPoint").transform;
-            Debug.Log("Çalýþýyo");
+          
             damgaliPaperList[i].tag = "Untagged";
         }
 
