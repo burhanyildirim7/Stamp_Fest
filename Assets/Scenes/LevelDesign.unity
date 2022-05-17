@@ -787,6 +787,10 @@ MonoBehaviour:
   tapToStartScoreText: {fileID: 1455347960582755020}
   totalElmasText: {fileID: 0}
   ScoreTextAnim: {fileID: 2326140859153717883}
+  upgradeIncome: {fileID: 0}
+  upgradeStamina: {fileID: 0}
+  upgradeStamp: {fileID: 0}
+  blockClickWall: {fileID: 0}
 --- !u!4 &955729543
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,10 +1356,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDamga: 0
   brokeDamga: 0
+  damgalar: []
   comboSpeed: 0.2
   elHakki: 0
+  elHakkiLimit: 0
   damgaSpeed: 1
   damgaHakki: 0
+  damgaLevel: 1
   smokeParticle: {fileID: 0}
   elHakkiText: {fileID: 0}
   handMaterial: {fileID: 0}
@@ -5094,10 +5101,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2515761378217852347, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.87
-      objectReference: {fileID: 0}
     - target: {fileID: 3442862754494499396, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -5145,10 +5148,6 @@ PrefabInstance:
     - target: {fileID: 3442862754494499399, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
       propertyPath: m_Name
       value: LEVEL X
-      objectReference: {fileID: 0}
-    - target: {fileID: 3442862754494499399, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb33ad1ce8c156947914f4e80a765570, type: 3}
@@ -5240,11 +5239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098162770935033991, guid: 1ad02cf68c75def4dac4b3631d97a398, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.51
       objectReference: {fileID: 0}
     - target: {fileID: 4098162770935033991, guid: 1ad02cf68c75def4dac4b3631d97a398, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 4098162770935033991, guid: 1ad02cf68c75def4dac4b3631d97a398, type: 3}
       propertyPath: m_LocalRotation.w
