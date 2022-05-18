@@ -81,10 +81,10 @@ public class PlayerController : MonoBehaviour
     public void StartingEvents()
     {
         GameObject paperControl = GameObject.FindGameObjectWithTag("PaperControl");
+      
 
-       
-            paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
-            paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
+        paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
+        paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
 
         
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;

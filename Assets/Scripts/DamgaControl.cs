@@ -158,9 +158,9 @@ public class DamgaControl : MonoBehaviour
                 GameController.instance.isContinue = false;
                 PlayerController.GetComponent<PlayerController>().startGame = false;
                
-                GameController.instance.SetScore(15);
-                //GameController.instance.ScoreCarp(1);
-
+                GameController.instance.SetScore(PlayerPrefs.GetInt("anlikKazanc"));
+                GameController.instance.ScoreCarp(1);
+               
                 UIController.instance.ActivateWinScreen();
 
             }
