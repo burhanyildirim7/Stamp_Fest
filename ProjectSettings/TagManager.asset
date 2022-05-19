@@ -22,6 +22,7 @@ TagManager:
   - stackPaperPoint
   - door
   - tablePoint
+  - Slider
   layers:
   - Default
   - TransparentFX

@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     public bool xVarMi = true;
     public bool collectibleVarMi = true;
     public bool startGame = false;
+    [SerializeField] Slider slider;
    //int gameLevel = 1;
     private void Awake()
     {
         if (instance == null) instance = this;
-       
+
+   
 
         //else Destroy(this);
     }
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
      void Update()
     {
 
-        PlayerPrefs.GetInt("totalScore");
+     
         
     }
     /// <summary>
@@ -84,9 +86,7 @@ public class PlayerController : MonoBehaviour
       
 
         paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
-        paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;
-
-        
+        paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;      
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
         paperControl.GetComponent<PaperControl>().damgaPaperSayisi = 0;
         paperControl.GetComponent<PaperControl>().totalPoint = PlayerPrefs.GetInt("totalPoint");
@@ -99,10 +99,16 @@ public class PlayerController : MonoBehaviour
 
         paperControl.GetComponent<PaperControl>().anlikKazanc = 0;
         PlayerPrefs.SetInt("anlikKazanc", paperControl.GetComponent<PaperControl>().anlikKazanc);
-       
 
 
 
+        if (PlayerPrefs.GetInt("damgaHakki")<= 0)
+        {
+            PlayerPrefs.SetInt("damgaHakki", 5);
+           
+        }
+        slider.maxValue = PlayerPrefs.GetInt("damgaHakki");
+        slider.value = slider.maxValue;
         GetComponent<DamgaControl>().elHakki = PlayerPrefs.GetFloat("elHakki"); 
         GetComponent<DamgaControl>().damgaHakki = PlayerPrefs.GetInt("damgaHakki"); 
         GetComponent<DamgaControl>().damgaLevel = PlayerPrefs.GetInt("damgaLevel"); 

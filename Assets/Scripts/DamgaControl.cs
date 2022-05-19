@@ -20,6 +20,7 @@ public class DamgaControl : MonoBehaviour
     public float elHakkiLimit;
     public float damgaSpeed = 1f;
     public int damgaHakki = 5;
+    public int damgaHakkiLimit;
     public int damgaLevel = 1;
     public ParticleSystem smokeParticle;
 
@@ -37,7 +38,7 @@ public class DamgaControl : MonoBehaviour
 
     void Start()
     {
-     
+    
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
         firstRotationDamga = transform.eulerAngles;
@@ -51,17 +52,15 @@ public class DamgaControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      
+
         if (elHakkiLimit < 10)
         {
             elHakkiLimit = 10;
 
         }
 
-        if (damgaHakki == 0)
-        {
-            damgaHakki = 5;
-        }
+     
 
         if (damgaLevel == 0)
         {
@@ -75,10 +74,13 @@ public class DamgaControl : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
         {
+            
 
             DamgaLevelFunction();
             elHakki = elHakkiLimit;
             PlayerPrefs.SetFloat("elHakki",elHakki);
+           
+        
            
         }
 
@@ -150,18 +152,16 @@ public class DamgaControl : MonoBehaviour
 
             if (PlayerPrefs.GetInt("damgaHakki") <= 0)
             {
-
                 // FINISH BURAYA GELECEK
+                Debug.Log("Sýfýr DamgaControl");
                 brokeDamga = true;
-              
-
                 GameController.instance.isContinue = false;
-                PlayerController.GetComponent<PlayerController>().startGame = false;
-               
+                PlayerController.GetComponent<PlayerController>().startGame = false;        
                 GameController.instance.SetScore(PlayerPrefs.GetInt("anlikKazanc"));
                 GameController.instance.ScoreCarp(1);
-               
                 UIController.instance.ActivateWinScreen();
+
+       
 
             }
         }
@@ -235,35 +235,35 @@ public class DamgaControl : MonoBehaviour
     {
         var dumanScale = 0.01f;
         Mathf.Clamp(dumanScale, 0.01f, 3f);
-      
 
+    
 
-      
-
-        if (elHakki > 5 && elHakki <=8)
+        if (elHakki > 5 && elHakki <= 8)
         {
-      
+
             smokeParticle.Play();
 
-            smokeParticle.transform.DOScale(new Vector3(1,1,1),1);
+            smokeParticle.transform.DOScale(new Vector3(1, 1, 1), 1);
             smokeParticle.startColor = Color.Lerp(smokeParticle.startColor, Color.black, 0.5f * Time.deltaTime);
             handMaterial.color = Color.Lerp(handMaterial.color, Color.red, 0.5f * Time.deltaTime);
 
 
-
+           
         }
 
-        if (elHakki< 5)
+        if (elHakki < 5)
         {
             smokeParticle.transform.DOScale(new Vector3(2, 2, 2), 1);
 
         }
 
-        if (elHakki>8)
+        if (elHakki > 8)
         {
             smokeParticle.Stop();
             smokeParticle.startColor = Color.white;
             handMaterial.color = Color.Lerp(handMaterial.color, firstHandColor, 1 * Time.deltaTime);
         }
     }
+
+
 }
