@@ -222,6 +222,7 @@ public class DamgaControl : MonoBehaviour
     {
         if (other.gameObject.tag == "damgaYok")
         {
+            MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
             paperControl.GetComponent<PaperControl>().MoveCompleteTable();
             other.gameObject.tag = "damgaVar";
             damgaHakki--;
