@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4770398, g: 0.79908794, b: 0.8987446, a: 1}
+  m_IndirectSpecularColor: {r: 0.47884, g: 0.8001845, b: 0.90072787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1020,6 +1020,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeStampButton: {fileID: 562302467}
   priceOfStampText: {fileID: 567435035}
+  stampLevelText: {fileID: 555002907}
+  stampLevel: 0
+  priceOfStamp: 50
 --- !u!1 &567435033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeStaminaButton: {fileID: 668026929}
   priceOfStaminaText: {fileID: 1770253918}
+  staminaLevelText: {fileID: 1602416088}
+  staminaLevel: 0
 --- !u!1 &686106119
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,7 +3878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729471686}
   m_LocalRotation: {x: 0.07023986, y: 0.3265542, z: -0.4715416, w: 0.8161356}
-  m_LocalPosition: {x: 1.32, y: 1.93, z: 0.162}
+  m_LocalPosition: {x: 1.32, y: 2.1, z: 0.162}
   m_LocalScale: {x: 0.3, y: 0.75, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3902,6 +3907,9 @@ MonoBehaviour:
   collectibleVarMi: 1
   startGame: 0
   slider: {fileID: 7628639478630669047}
+  upgradeIncome: {fileID: 1853089447}
+  upgradeStamina: {fileID: 668026927}
+  upgradeStamp: {fileID: 562302464}
 --- !u!1 &1755820686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4273,6 +4281,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 646251150401705442, guid: 8fddb85ad766ed64187e47c6a57fcaad, type: 3}
     - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
+      propertyPath: dolarMiktar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 722109205173698165, guid: e2184079ad9362e4eb4d042d70906dc6, type: 3}
       propertyPath: totalPointText
       value: 
       objectReference: {fileID: 1713292746}
@@ -4449,6 +4461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeIncomeButton: {fileID: 1853089449}
   priceOfIncomeText: {fileID: 863260965}
+  incomeLevel: 0
+  incomeLevelText: {fileID: 1285733061}
 --- !u!1 &1856652740
 GameObject:
   m_ObjectHideFlags: 0
@@ -5292,6 +5306,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 321e4953059c5114cb5b971f8ea3fa7b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 321e4953059c5114cb5b971f8ea3fa7b, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 321e4953059c5114cb5b971f8ea3fa7b, type: 3}
       propertyPath: m_Name
       value: damga6
@@ -5576,6 +5598,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8a4b9f49e7c48114da7b2dc8c2ad3e91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8a4b9f49e7c48114da7b2dc8c2ad3e91, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8a4b9f49e7c48114da7b2dc8c2ad3e91, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8a4b9f49e7c48114da7b2dc8c2ad3e91, type: 3}
@@ -6132,6 +6162,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 3fe2f89877e1ba443b8a4753259b9fd4, type: 3}
       propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 3fe2f89877e1ba443b8a4753259b9fd4, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 3fe2f89877e1ba443b8a4753259b9fd4, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 3fe2f89877e1ba443b8a4753259b9fd4, type: 3}
@@ -9771,6 +9809,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 415f7f4881ff357438c564d312fa0e7f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 415f7f4881ff357438c564d312fa0e7f, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 415f7f4881ff357438c564d312fa0e7f, type: 3}
       propertyPath: m_AABB.m_Center.x
       value: 0.000000009313226
       objectReference: {fileID: 0}
@@ -12555,6 +12601,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 66023b4441844ae4fbec3ea75ff7a45c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 66023b4441844ae4fbec3ea75ff7a45c, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 66023b4441844ae4fbec3ea75ff7a45c, type: 3}
       propertyPath: m_Name
       value: damga1
@@ -13627,6 +13681,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: dbf265b306a836244a763f3dcf30d141, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: dbf265b306a836244a763f3dcf30d141, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dbf265b306a836244a763f3dcf30d141, type: 3}
       propertyPath: m_Name
       value: damga4
@@ -14021,6 +14083,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 24647fe5bd2054048b83b0adb8a7c462, type: 3}
       propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 24647fe5bd2054048b83b0adb8a7c462, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 24647fe5bd2054048b83b0adb8a7c462, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 24647fe5bd2054048b83b0adb8a7c462, type: 3}
@@ -14694,6 +14764,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: baa699f130451fb41bb9c16e1716d4d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: baa699f130451fb41bb9c16e1716d4d2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: baa699f130451fb41bb9c16e1716d4d2, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: baa699f130451fb41bb9c16e1716d4d2, type: 3}
@@ -15533,6 +15611,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f31438d1010a17449a054d8c1c1f0ab8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f31438d1010a17449a054d8c1c1f0ab8, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f31438d1010a17449a054d8c1c1f0ab8, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f31438d1010a17449a054d8c1c1f0ab8, type: 3}

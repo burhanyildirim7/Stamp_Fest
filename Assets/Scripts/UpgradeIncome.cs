@@ -6,6 +6,8 @@ public class UpgradeIncome : MonoBehaviour
 {
 	public Button upgradeIncomeButton;
 	public Text priceOfIncomeText;
+	public int incomeLevel;
+	public Text incomeLevelText;
 	int priceOfIncome;
 
 	void Start()
@@ -13,19 +15,27 @@ public class UpgradeIncome : MonoBehaviour
 		Button btn = upgradeIncomeButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 
-        if (priceOfIncome == 0)
+        if (priceOfIncome == 0 && incomeLevel == 0)
         {
 			priceOfIncome = 50;
 			PlayerPrefs.SetInt("priceOfIncome", priceOfIncome);
+			incomeLevel = 1;
+			PlayerPrefs.SetInt("incomeLevel", incomeLevel);
 		}
 		priceOfIncomeText.text = PlayerPrefs.GetInt("priceOfIncome") + "$";
+		incomeLevelText.text ="LVL " + PlayerPrefs.GetInt("incomeLevel");
 	}
 
-	
+     void Update()
+    {
+		incomeLevelText.text = "LVL " + PlayerPrefs.GetInt("incomeLevel");
 
-	void TaskOnClick()
+	
+	}
+
+
+    void TaskOnClick()
 	{
-		
 
 		if (PlayerPrefs.GetInt("totalScore") < PlayerPrefs.GetInt("priceOfIncome"))
 		{
@@ -33,8 +43,11 @@ public class UpgradeIncome : MonoBehaviour
 		}
 		else
 		{
-			GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktar += 5;
-			PlayerPrefs.SetInt("dolarMiktar�", GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktar);
+
+			incomeLevel++;
+			PlayerPrefs.SetInt("incomeLevel", incomeLevel);
+			GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktari += 5;
+			PlayerPrefs.SetInt("dolarMiktari", GameObject.FindGameObjectWithTag("PaperControl").GetComponent<PaperControl>().dolarMiktari);
 
 			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore") - priceOfIncome);
 			priceOfIncome *= 2;

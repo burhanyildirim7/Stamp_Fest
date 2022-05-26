@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public bool collectibleVarMi = true;
     public bool startGame = false;
     [SerializeField] Slider slider;
+
+    public GameObject upgradeIncome;
+    public GameObject upgradeStamina;
+    public GameObject upgradeStamp;
    //int gameLevel = 1;
     private void Awake()
     {
@@ -83,8 +87,15 @@ public class PlayerController : MonoBehaviour
     public void StartingEvents()
     {
         GameObject paperControl = GameObject.FindGameObjectWithTag("PaperControl");
-      
 
+        
+        upgradeIncome.GetComponent<UpgradeIncome>().incomeLevel = PlayerPrefs.GetInt("incomeLevel");
+        upgradeStamina.GetComponent<UpgradeStamina>().staminaLevel = PlayerPrefs.GetInt("staminaLevel");
+       
+        upgradeStamp.GetComponent<UpgradeStamp>().stampLevel = PlayerPrefs.GetInt("stampLevel");
+
+
+        
         paperControl.GetComponent<PaperControl>().spawnPaperNumber = PlayerPrefs.GetInt("spawnPaperNumber");    // SPAWN EDİLECEK KAĞIT SAYISI
         paperControl.GetComponent<PaperControl>().spawnPaperTower = paperControl.GetComponent<PaperControl>().spawnPaperNumber;      
         paperControl.GetComponent<PaperControl>().currentPaperNumber = 0;
@@ -95,7 +106,7 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();
         paperControl.GetComponent<PaperControl>().spawnPaperFunc();
-        paperControl.GetComponent<PaperControl>().dolarMiktar = PlayerPrefs.GetInt("dolarMiktarı");
+        paperControl.GetComponent<PaperControl>().dolarMiktari = PlayerPrefs.GetInt("dolarMiktari");
 
         paperControl.GetComponent<PaperControl>().anlikKazanc = 0;
         PlayerPrefs.SetInt("anlikKazanc", paperControl.GetComponent<PaperControl>().anlikKazanc);

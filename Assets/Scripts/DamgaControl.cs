@@ -210,7 +210,7 @@ public class DamgaControl : MonoBehaviour
     {
        
         transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/1.5f).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/ 1.5f)) ;
-        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-0.7f, transform.position.z), damgaSpeed/ 1.5f).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/ 1.5f)); // Damganýn basýlacaðý yer kodu
+        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-2.5f, transform.position.z), damgaSpeed/ 1.5f).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/ 1.5f)); // Damganýn basýlacaðý yer kodu
        
         canDamga = false;
         

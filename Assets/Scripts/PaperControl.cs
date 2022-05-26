@@ -1,7 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 
 public class PaperControl : MonoBehaviour
@@ -34,7 +34,7 @@ public class PaperControl : MonoBehaviour
     public int anlikKazanc;
     int paperSiraNumber = 30;  // KAGITLARIN KA�AR TANE �ST �STE D�Z�LECE��N� BURAYA G�R�YORUZ.
     int damgaliPaperTransform = 0;
-    public int dolarMiktar;
+    public int dolarMiktari;
     int gameLevel = 1;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
@@ -48,9 +48,15 @@ public class PaperControl : MonoBehaviour
 
      void Awake()
     {
+        if (damgaliPaperList.Length <= 0)
+        {
+            PlayerPrefs.SetInt("totalPointFake" , 0);
+            totalPointFake = 0;
+        }
+
         if (gameLevel == 1)
         {
-            spawnPaperNumber = 150;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
+            spawnPaperNumber = 1000;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -58,7 +64,7 @@ public class PaperControl : MonoBehaviour
 
         else if (gameLevel == 2)
         {
-            spawnPaperNumber = 150;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
+            spawnPaperNumber = 1500;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -66,7 +72,7 @@ public class PaperControl : MonoBehaviour
 
         else if (gameLevel == 3)
         {
-            spawnPaperNumber = 250;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
+            spawnPaperNumber = 2500;  // KA� KA�IT SPAWN ED�LECE�� BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -81,16 +87,13 @@ public class PaperControl : MonoBehaviour
         UIController = GameObject.FindGameObjectWithTag("UIController");
        
        
-        if (PlayerPrefs.GetInt("dolarMiktar�")<=15)
+        if (PlayerPrefs.GetInt("dolarMiktari")<=15)
         {
-            dolarMiktar = 15;
-            PlayerPrefs.SetInt("dolarMiktar�", dolarMiktar);
+            dolarMiktari = 15;
+            PlayerPrefs.SetInt("dolarMiktari", dolarMiktari);
         }
 
-        if (damgaliPaperList.Length <= 0)
-        {
-            totalPointFake = 0;
-        }
+       
 
       
             
@@ -128,7 +131,7 @@ public class PaperControl : MonoBehaviour
 
            
        
-        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktar; // Para animasyonu ka� olacaksa buraya yaz�yoruz
+        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktari; // Para animasyonu ka� olacaksa buraya yaz�yoruz
            
 
 
@@ -137,7 +140,7 @@ public class PaperControl : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("dolarMiktar�" ,dolarMiktar);
+            PlayerPrefs.SetInt("dolarMiktari" ,dolarMiktari);
         }
       
     }
@@ -160,8 +163,8 @@ public class PaperControl : MonoBehaviour
      
         damgaPaperSayisi++;
         Instantiate(dolarAnim, paperList[currentPaperNumber].transform.position, Quaternion.identity);
-        totalMoney += dolarMiktar;
-        anlikKazanc += dolarMiktar;
+        totalMoney += dolarMiktari;
+        anlikKazanc += dolarMiktari;
         PlayerPrefs.SetInt("totalMoney", totalMoney); 
         PlayerPrefs.SetInt("anlikKazanc", anlikKazanc); 
         //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + damgaliPaperList.Length / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });

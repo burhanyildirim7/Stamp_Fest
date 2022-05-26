@@ -7,25 +7,41 @@ public class UpgradeStamp : MonoBehaviour
 {
 	public Button upgradeStampButton;
 	public Text priceOfStampText;
-	int priceOfStamp;
+	public Text stampLevelText;
+	public int stampLevel;
+	public int priceOfStamp;
 	GameObject Damga;
-	void Start()
+
+
+    void Start()
 	{
 		Button btn = upgradeStampButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		Damga = GameObject.FindGameObjectWithTag("damga");
 
-		if (priceOfStamp == 0)
-		{
+
+
+        if (PlayerPrefs.GetInt("stampLevel") == 0)
+        {
+			stampLevel = 1;
+			PlayerPrefs.SetInt("stampLevel", stampLevel);
 			priceOfStamp = 50;
 			PlayerPrefs.SetInt("priceOfStamp", priceOfStamp);
 		}
 	
 		priceOfStampText.text = PlayerPrefs.GetInt("priceOfStamp") + "$";
+		stampLevelText.text = "LVL "+PlayerPrefs.GetInt("stampLevel");
 	}
 
-	void TaskOnClick()
+     void Update()
+    {
+		stampLevelText.text = "LVL "+PlayerPrefs.GetInt("stampLevel");
+		Debug.Log(stampLevel);
+    }
+
+    void TaskOnClick()
 	{
+
 
         if (PlayerPrefs.GetInt("totalScore")< PlayerPrefs.GetInt("priceOfStamp"))
         {
@@ -33,7 +49,15 @@ public class UpgradeStamp : MonoBehaviour
 		}
         else
         {
-			Damga.GetComponent<DamgaControl>().damgaLevel++;
+            for (int i = 0; i < 9; i++)
+            {
+                if (stampLevel  == 5*i)
+                {
+					Damga.GetComponent<DamgaControl>().damgaLevel++;
+				}
+            }
+			stampLevel++;
+			PlayerPrefs.SetInt("stampLevel", stampLevel);
 			PlayerPrefs.SetInt("totalScore", PlayerPrefs.GetInt("totalScore") - PlayerPrefs.GetInt("priceOfStamp"));
 			priceOfStamp *= 2;
 			PlayerPrefs.SetInt("priceOfStamp", priceOfStamp);
