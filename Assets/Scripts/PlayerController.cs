@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         paperControl.GetComponent<PaperControl>().sendPaperToTable = true;
         paperControl.GetComponent<PaperControl>().DeletePapers();
         paperControl.GetComponent<PaperControl>().spawnPaperFunc();
-        paperControl.GetComponent<PaperControl>().dolarMiktarı = PlayerPrefs.GetInt("dolarMiktarı");
+        paperControl.GetComponent<PaperControl>().dolarMiktar = PlayerPrefs.GetInt("dolarMiktarı");
 
         paperControl.GetComponent<PaperControl>().anlikKazanc = 0;
         PlayerPrefs.SetInt("anlikKazanc", paperControl.GetComponent<PaperControl>().anlikKazanc);

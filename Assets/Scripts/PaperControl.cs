@@ -17,7 +17,7 @@ public class PaperControl : MonoBehaviour
     public GameObject spawnPaperPosition;
     public int totalPoint = 0;
     public int totalPointFake = 0;
-    public int spawnPaperNumber; //ne kadar kaðýt spawn olacak onu belirliyor
+    public int spawnPaperNumber; //ne kadar kaï¿½ï¿½t spawn olacak onu belirliyor
     public int spawnPaperTower;
 
     public Text totalPointText;
@@ -32,9 +32,9 @@ public class PaperControl : MonoBehaviour
 
     int totalMoney;
     public int anlikKazanc;
-    int paperSiraNumber = 20;  // KAGITLARIN KAÇAR TANE ÜST ÜSTE DÝZÝLECEÐÝNÝ BURAYA GÝRÝYORUZ.
+    int paperSiraNumber = 30;  // KAGITLARIN KAï¿½AR TANE ï¿½ST ï¿½STE Dï¿½Zï¿½LECEï¿½ï¿½Nï¿½ BURAYA Gï¿½Rï¿½YORUZ.
     int damgaliPaperTransform = 0;
-    public int dolarMiktarý;
+    public int dolarMiktar;
     int gameLevel = 1;
     public int currentPaperNumber = 0;
     public int damgaPaperSayisi = 0;
@@ -50,7 +50,7 @@ public class PaperControl : MonoBehaviour
     {
         if (gameLevel == 1)
         {
-            spawnPaperNumber = 50;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+            spawnPaperNumber = 150;  // KAï¿½ KAï¿½IT SPAWN EDï¿½LECEï¿½ï¿½ BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -58,7 +58,7 @@ public class PaperControl : MonoBehaviour
 
         else if (gameLevel == 2)
         {
-            spawnPaperNumber = 150;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+            spawnPaperNumber = 150;  // KAï¿½ KAï¿½IT SPAWN EDï¿½LECEï¿½ï¿½ BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -66,7 +66,7 @@ public class PaperControl : MonoBehaviour
 
         else if (gameLevel == 3)
         {
-            spawnPaperNumber = 250;  // KAÇ KAÐIT SPAWN EDÝLECEÐÝ BURAYA
+            spawnPaperNumber = 250;  // KAï¿½ KAï¿½IT SPAWN EDï¿½LECEï¿½ï¿½ BURAYA
 
             //spawnPaperTower = spawnPaperNumber;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
@@ -81,10 +81,10 @@ public class PaperControl : MonoBehaviour
         UIController = GameObject.FindGameObjectWithTag("UIController");
        
        
-        if (PlayerPrefs.GetInt("dolarMiktarý")<=15)
+        if (PlayerPrefs.GetInt("dolarMiktarï¿½")<=15)
         {
-            dolarMiktarý = 15;
-            PlayerPrefs.SetInt("dolarMiktarý", dolarMiktarý);
+            dolarMiktar = 15;
+            PlayerPrefs.SetInt("dolarMiktarï¿½", dolarMiktar);
         }
 
         if (damgaliPaperList.Length <= 0)
@@ -106,7 +106,7 @@ public class PaperControl : MonoBehaviour
 
         if (spawnPaperNumber<=0)
         {
-            Debug.Log("OYUN BÝTTÝ");
+            Debug.Log("OYUN Bï¿½TTï¿½");
         }
 
         for (var i = paperList.Count - 1; i > -1; i--)
@@ -128,7 +128,7 @@ public class PaperControl : MonoBehaviour
 
            
        
-        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktarý; // Para animasyonu kaç olacaksa buraya yazýyoruz
+        dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktar; // Para animasyonu kaï¿½ olacaksa buraya yazï¿½yoruz
            
 
 
@@ -137,7 +137,7 @@ public class PaperControl : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("dolarMiktarý" ,dolarMiktarý);
+            PlayerPrefs.SetInt("dolarMiktarï¿½" ,dolarMiktar);
         }
       
     }
@@ -147,21 +147,21 @@ public class PaperControl : MonoBehaviour
         if (sendPaperToTable)  //Ana masaya giden kod
         {
 
-            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, Table.transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x,Table.transform.position.y+0.5f,Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
+            paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, Table.transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x,Table.transform.position.y+0.1f,Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
 
             sendPaperToTable = false;
 
         }
     }
-    public void MoveCompleteTable() //Tamamlandýktan sonra gittiði masa kodu
+    public void MoveCompleteTable() //Tamamlandï¿½ktan sonra gittiï¿½i masa kodu
     {
 
  
      
         damgaPaperSayisi++;
         Instantiate(dolarAnim, paperList[currentPaperNumber].transform.position, Quaternion.identity);
-        totalMoney += dolarMiktarý;
-        anlikKazanc += dolarMiktarý;
+        totalMoney += dolarMiktar;
+        anlikKazanc += dolarMiktar;
         PlayerPrefs.SetInt("totalMoney", totalMoney); 
         PlayerPrefs.SetInt("anlikKazanc", anlikKazanc); 
         //paperList[currentPaperNumber].transform.DOMove(new Vector3(CompletedTable.transform.position.x, CompletedTable.transform.position.y + damgaliPaperList.Length / 10f, CompletedTable.transform.position.z), paperMoveSpeed).OnComplete(() => { sendPaperToTable = true; currentPaperNumber++; });
@@ -178,7 +178,7 @@ public class PaperControl : MonoBehaviour
             if (damgaliPaperList.Length >= paperSiraNumber && totalPointFake >= paperSiraNumber)
             {
                 for (int i = 0; i < damgaliPaperList.Length; i++)
-                {
+                {//SEKTER ALSIN DÄ°YE KAYDIRILANLAR
                     damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z + 2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
 
                         Damga.GetComponent<PlayerController>().startGame = true;
@@ -224,7 +224,7 @@ public class PaperControl : MonoBehaviour
             {
             damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
     
-            if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETÝ BURADA
+            if (paperList[i].tag == "damgaYok")  // DAMGASIZLARIN HAREKETï¿½ BURADA
             {
             
                     paperList[i].transform.DOJump(new Vector3(paperList[i].transform.position.x + 3f, paperList[i].transform.position.y, paperList[i].transform.position.z), 1, 1, paperMoveSpeed).OnComplete(() => {
@@ -241,7 +241,7 @@ public class PaperControl : MonoBehaviour
         
               
             }
-            else  // DAMGALILARIN HAREKETÝ BURADA
+            else  // DAMGALILARIN HAREKETï¿½ BURADA
             {
                 /*
                 damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z+2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
@@ -289,7 +289,7 @@ public class PaperControl : MonoBehaviour
                 for (int i = paperSiraNumber; i > 0; i--)
                 {
                     RandomPaperChoose();
-                    var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x-a*3, (i-10) / 10f, spawnPaperPosition.transform.position.z), Quaternion.identity);
+                    var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x-a*2.2f, (i-22) / 20f, spawnPaperPosition.transform.position.z), Quaternion.Euler(new Vector3(0, 90, 0)));
                     paperList.Add(spawnedPaper);
                     spawnPaperTower--;
                 
@@ -300,7 +300,7 @@ public class PaperControl : MonoBehaviour
             for (int i = spawnPaperTower; i > 0; i--)
             {
                     RandomPaperChoose();
-                var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x -a*3, (i - 10) / 10f, spawnPaperPosition.transform.position.z), Quaternion.identity);
+                var spawnedPaper = Instantiate(paperObje, new Vector3(spawnPaperPosition.transform.position.x -a*2.2f, (i - 22) / 20f, spawnPaperPosition.transform.position.z), Quaternion.Euler(new Vector3(0, 90, 0)));
                 paperList.Add(spawnedPaper);
                     spawnPaperTower--;
 

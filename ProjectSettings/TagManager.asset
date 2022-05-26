@@ -23,6 +23,7 @@ TagManager:
   - door
   - tablePoint
   - Slider
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - el
   - 
   - 
   - 
