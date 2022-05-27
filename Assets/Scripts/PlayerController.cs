@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     public GameObject upgradeIncome;
     public GameObject upgradeStamina;
     public GameObject upgradeStamp;
+
+    public GameObject damga;
+    public GameObject paperController;
+    public GameObject sekreter;
    //int gameLevel = 1;
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         StartingEvents();
+
    
     }
 
@@ -78,7 +83,6 @@ public class PlayerController : MonoBehaviour
      void Update()
     {
 
-     
         
     }
     /// <summary>

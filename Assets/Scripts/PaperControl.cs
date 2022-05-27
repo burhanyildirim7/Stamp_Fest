@@ -93,11 +93,11 @@ public class PaperControl : MonoBehaviour
             PlayerPrefs.SetInt("dolarMiktari", dolarMiktari);
         }
 
+
+
+
        
 
-      
-            
-       
 
         // spawnPaperFunc();
     }
@@ -105,6 +105,8 @@ public class PaperControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+     
         damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
 
         if (spawnPaperNumber<=0)
@@ -132,15 +134,16 @@ public class PaperControl : MonoBehaviour
            
        
         dolarAnim.GetComponent<TextMesh>().text = "$" + dolarMiktari; // Para animasyonu ka� olacaksa buraya yaz�yoruz
-           
 
 
 
-        SendMainTable();   
+         
+            SendMainTable();   
         }
         else
         {
             PlayerPrefs.SetInt("dolarMiktari" ,dolarMiktari);
+
         }
       
     }
@@ -152,6 +155,7 @@ public class PaperControl : MonoBehaviour
 
             paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x, paperList[currentPaperNumber].transform.position.y, Table.transform.position.z), paperMoveSpeed).OnComplete(() => { paperList[currentPaperNumber].transform.DOMove(new Vector3(Table.transform.position.x,Table.transform.position.y+0.1f,Table.transform.position.z), paperMoveSpeed).OnComplete(() => Damga.GetComponent<DamgaControl>().canDamga = true); });
 
+        
             sendPaperToTable = false;
 
         }
@@ -178,27 +182,43 @@ public class PaperControl : MonoBehaviour
             spawnPaperNumber--;
             PlayerPrefs.SetInt("spawnPaperNumber", spawnPaperNumber);
 
+            if (Damga.GetComponent<PlayerController>().startGame&&damgaliPaperList.Length == paperSiraNumber+1)
+            {
+
+                Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
+                Debug.Log("Çalışıyor");
+
+            }
+
+
             if (damgaliPaperList.Length >= paperSiraNumber && totalPointFake >= paperSiraNumber)
             {
+              
                 for (int i = 0; i < damgaliPaperList.Length; i++)
                 {//SEKTER ALSIN DİYE KAYDIRILANLAR
                     damgaliPaperList[i].transform.DOJump(new Vector3(damgaliPaperList[i].transform.position.x, damgaliPaperList[i].transform.position.y, damgaliPaperList[i].transform.position.z + 2.7f), 1, 1, paperMoveSpeed).OnComplete(() => {
 
-                        Damga.GetComponent<PlayerController>().startGame = true;
-                       
-                        
+
+                        currentPaperNumber = 0;
+
+                        totalPointFake = 0;
+                        PlayerPrefs.SetInt("totalPointFake", totalPointFake);
+
                         for (int a = 0; a < damgaliPaperList.Length; a++)
                         {
                             paperList.Remove(damgaliPaperList[a]);
                         }
-                        currentPaperNumber = 0;
-                        Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
 
+
+                   
 
                     });
-
+            
                 }
-                totalPointFake = 0;
+
+               
+                //Instantiate(sekreter, new Vector3(19, -10, 23), Quaternion.identity);
+
             }
             damgaliPaperTransform++;
         });
@@ -221,9 +241,9 @@ public class PaperControl : MonoBehaviour
 
         Damga.GetComponent<PlayerController>().startGame = false;
         yield return new WaitForSecondsRealtime(paperMoveSpeed);
-        
-      
-            for (int i = 0; i < paperList.Count; i++)
+    
+
+        for (int i = 0; i < paperList.Count; i++)
             {
             damgaliPaperList = GameObject.FindGameObjectsWithTag("damgaVar");
     

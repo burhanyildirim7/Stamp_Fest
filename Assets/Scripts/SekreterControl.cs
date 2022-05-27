@@ -16,11 +16,19 @@ public class SekreterControl : MonoBehaviour
         sekreterAnim = GetComponent<Animator>();
         targetTablePoint = GameObject.FindGameObjectWithTag("tablePoint").transform;
         leavePerspectivePoint = GameObject.FindGameObjectWithTag("door").transform;
-       
+
+
+
         WalkToTable();
+
+
     }
 
-  
+     void Update()
+    {
+
+ 
+    }
     void WalkToTable()
     {
 
