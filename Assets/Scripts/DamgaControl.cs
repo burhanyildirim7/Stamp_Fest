@@ -226,17 +226,25 @@ public class DamgaControl : MonoBehaviour
     {
         if (other.gameObject.tag == "damgaYok")
         {
-            MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
-            paperControl.GetComponent<PaperControl>().MoveCompleteTable();
+            StartCoroutine(TriggerDelay());
             other.gameObject.tag = "damgaVar";
-            damgaHakki--;
-            PlayerPrefs.SetInt("damgaHakki", damgaHakki);
-            elHakki--;
             other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
     }
 
+
+    IEnumerator TriggerDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
+        paperControl.GetComponent<PaperControl>().MoveCompleteTable();
+        
+        damgaHakki--;
+        PlayerPrefs.SetInt("damgaHakki", damgaHakki);
+        elHakki--;
+  
+    }
     void SmokeControl()
     {
         var dumanScale = 0.01f;
