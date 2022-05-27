@@ -232,6 +232,7 @@ public class DamgaControl : MonoBehaviour
             damgaHakki--;
             PlayerPrefs.SetInt("damgaHakki", damgaHakki);
             elHakki--;
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
     }

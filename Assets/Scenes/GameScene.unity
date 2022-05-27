@@ -3913,6 +3913,7 @@ MonoBehaviour:
   upgradeStamp: {fileID: 562302464}
   damga: {fileID: 1729471686}
   paperController: {fileID: 2049526222}
+  sekreter: {fileID: 0}
 --- !u!1 &1755820686
 GameObject:
   m_ObjectHideFlags: 0
