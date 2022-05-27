@@ -32,27 +32,29 @@ public class DamgaControl : MonoBehaviour
 
     public Material handMaterial;
     public Color firstHandColor;
-    
+
+    public GameObject _tapAndHold;
+
 
 
 
     void Start()
     {
-    
+
         firstHandColor = handMaterial.color;
         firstPositionDamga = transform.position;
         firstRotationDamga = transform.eulerAngles;
         paperControl = GameObject.FindGameObjectWithTag("PaperControl");
         PlayerController = GameObject.FindGameObjectWithTag("damga");
-   
 
+        _tapAndHold.SetActive(true);
     }
 
- 
+
     // Update is called once per frame
     void Update()
     {
-      
+
 
         if (elHakkiLimit < 10)
         {
@@ -60,7 +62,7 @@ public class DamgaControl : MonoBehaviour
 
         }
 
-     
+
 
         if (damgaLevel == 0)
         {
@@ -68,40 +70,40 @@ public class DamgaControl : MonoBehaviour
         }
 
 
-      
+
 
         elHakkiText.text = "El Hakki = " + Mathf.RoundToInt(elHakki);
 
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame == false)
         {
-            
+
 
             DamgaLevelFunction();
             elHakki = elHakkiLimit;
-            PlayerPrefs.SetFloat("elHakki",elHakki);
-           
-        
-           
+            PlayerPrefs.SetFloat("elHakki", elHakki);
+
+
+
         }
 
         if (elHakki >= elHakkiLimit)
         {
             elHakki = elHakkiLimit;
         }
-        
-          else if (elHakki<=0)
-          {
-              GameController.instance.isContinue = false; // Nedense çalýþmýyor.
-              PlayerController.GetComponent<PlayerController>().startGame = false;
-              UIController.instance.ActivateLooseScreen();
 
-          }
-        
+        else if (elHakki <= 0)
+        {
+            GameController.instance.isContinue = false; // Nedense ï¿½alï¿½ï¿½mï¿½yor.
+            PlayerController.GetComponent<PlayerController>().startGame = false;
+            UIController.instance.ActivateLooseScreen();
 
-       
+        }
+
+
+
         if (GameObject.FindGameObjectWithTag("damga").GetComponent<PlayerController>().startGame)
         {
-          
+
             SmokeControl();
 
 
@@ -110,21 +112,21 @@ public class DamgaControl : MonoBehaviour
                 damgaSpeed -= comboSpeed * Time.deltaTime;
                 paperControl.GetComponent<PaperControl>().paperMoveSpeed -= comboSpeed * Time.deltaTime;
 
-                if (damgaSpeed<= 0.1f)
+                if (damgaSpeed <= 0.1f)
                 {
                     damgaSpeed = 0.1f;
                 }
 
-                else if (damgaSpeed >=1f)
+                else if (damgaSpeed >= 1f)
                 {
                     damgaSpeed = 1f;
                 }
 
-          
 
-             
 
-                if (paperControl.GetComponent<PaperControl>().paperMoveSpeed<=0.1f)
+
+
+                if (paperControl.GetComponent<PaperControl>().paperMoveSpeed <= 0.1f)
                 {
                     paperControl.GetComponent<PaperControl>().paperMoveSpeed = 0.1f;
                 }
@@ -137,13 +139,13 @@ public class DamgaControl : MonoBehaviour
             }
             else
             {
-                damgaSpeed += 1.5f*comboSpeed * Time.deltaTime;
-                paperControl.GetComponent<PaperControl>().paperMoveSpeed += 1.5f*comboSpeed * Time.deltaTime;
-                elHakki+= 2*Time.deltaTime;
+                damgaSpeed += 1.5f * comboSpeed * Time.deltaTime;
+                paperControl.GetComponent<PaperControl>().paperMoveSpeed += 1.5f * comboSpeed * Time.deltaTime;
+                elHakki += 2 * Time.deltaTime;
 
-                damgaSpeed = Mathf.Clamp(damgaSpeed,0.1f,1);
+                damgaSpeed = Mathf.Clamp(damgaSpeed, 0.1f, 1);
 
-              
+
             }
 
 
@@ -153,21 +155,21 @@ public class DamgaControl : MonoBehaviour
             if (PlayerPrefs.GetInt("damgaHakki") <= 0)
             {
                 // FINISH BURAYA GELECEK
-                Debug.Log("Sýfýr DamgaControl");
+                Debug.Log("Sï¿½fï¿½r DamgaControl");
                 brokeDamga = true;
                 GameController.instance.isContinue = false;
-                PlayerController.GetComponent<PlayerController>().startGame = false;        
+                PlayerController.GetComponent<PlayerController>().startGame = false;
                 GameController.instance.SetScore(PlayerPrefs.GetInt("anlikKazanc"));
                 GameController.instance.ScoreCarp(1);
                 UIController.instance.ActivateWinScreen();
 
-       
+
 
             }
         }
 
-   
-    
+
+
     }
 
     void DamgaLevelFunction()
@@ -184,17 +186,17 @@ public class DamgaControl : MonoBehaviour
                 PlayerPrefs.SetInt("damgaHakki", damgaHakki);
                 PlayerPrefs.SetInt("damgaLevel", damgaLevel);
             }
-        
-           
+
+
             else if (damgaLevel == i)
             {
                 damgaHakki = (i * 2) + 3;
 
                 for (int a = 0; a < damgalar.Count; a++)
                 {
-                    if (damgalar[i-1].activeSelf==false)
+                    if (damgalar[i - 1].activeSelf == false)
                     {
-                        damgalar[i-1].SetActive(true);
+                        damgalar[i - 1].SetActive(true);
                     }
                     else
                     {
@@ -205,16 +207,18 @@ public class DamgaControl : MonoBehaviour
                 PlayerPrefs.SetInt("damgaLevel", damgaLevel);
             }
         }
-        }
-        void DamgaBasmaFunction()
+    }
+    void DamgaBasmaFunction()
     {
-       
-        transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed/1.5f).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed/ 1.5f)) ;
-        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y-2.5f, transform.position.z), damgaSpeed/ 1.5f).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed/ 1.5f)); // Damganýn basýlacaðý yer kodu
-       
+
+        transform.DORotate(new Vector3(0, transform.rotation.y, transform.rotation.z), damgaSpeed / 1.5f).OnComplete(() => transform.DORotate(firstRotationDamga, damgaSpeed / 1.5f));
+        transform.DOMove(new Vector3(transform.position.x - 1f, transform.position.y - 2.5f, transform.position.z), damgaSpeed / 1.5f).OnComplete(() => transform.DOMove(firstPositionDamga, damgaSpeed / 1.5f)); // Damganï¿½n basï¿½lacaï¿½ï¿½ yer kodu
+
         canDamga = false;
-        
-  
+
+        MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
+
+        _tapAndHold.SetActive(false);
 
     }
 
@@ -229,7 +233,7 @@ public class DamgaControl : MonoBehaviour
             PlayerPrefs.SetInt("damgaHakki", damgaHakki);
             elHakki--;
         }
-  
+
     }
 
     void SmokeControl()
@@ -237,7 +241,7 @@ public class DamgaControl : MonoBehaviour
         var dumanScale = 0.01f;
         Mathf.Clamp(dumanScale, 0.01f, 3f);
 
-    
+
 
         if (elHakki > 5 && elHakki <= 8)
         {
@@ -249,7 +253,7 @@ public class DamgaControl : MonoBehaviour
             handMaterial.color = Color.Lerp(handMaterial.color, Color.red, 0.5f * Time.deltaTime);
 
 
-           
+
         }
 
         if (elHakki < 5)
